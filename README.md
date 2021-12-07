@@ -15,7 +15,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [React](https://reactjs.org)
 - [TypeScript](https://www.typescriptlang.org/)
 - [MirageJs](https://miragejs.com/)
-
+- [Styled Components](https://styled-components.com/)
 ## 💻 Projeto
 
 DtMoney é um website para organizar suas finanças, com as opções para adicionar gastos ou ganhos e ter uma métrica sobre esses dados. 
