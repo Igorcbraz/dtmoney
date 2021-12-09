@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useTransactions } from '../../hooks/useTransactions';
 
 import incomeImg from '../../assets/income.svg';
