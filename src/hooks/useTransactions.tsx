@@ -5,8 +5,9 @@ interface Transactions {
     id: number;
     title: string;
     amount: number;
-    type: string;
+    tipo: string;
     category: string;
+    payer: string;
     createdAt: string;
 }
 
@@ -30,16 +31,16 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
 
     useEffect(() => {
       api.get('transactions')
-        .then(response => setTransactions(response.data.transactions))
+        .then(response => setTransactions(response.data))
     }, [])
 
     async function createTransaction(transactionInput: TransactionInput){
-        const response = await api.post('/transactions', {
+        const response = await api.post('transactions', {
             ...transactionInput,
             createdAt: new Date(),
         });
-        const { transaction } = response.data;
-
+        const transaction = response.data;
+        console.log(transaction)
         setTransactions([
             ...transactions,
             transaction

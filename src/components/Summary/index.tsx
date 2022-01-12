@@ -12,7 +12,7 @@ export function Summary(){
     const { transactions } = useTransactions();
 
     const summary = transactions.reduce((acc, transaction) => {
-        if(transaction.type === 'deposit') {
+        if(transaction.tipo === 'deposit') {
             acc.deposits += transaction.amount;
             acc.total += transaction.amount
         } else {

@@ -13,14 +13,14 @@ interface NewTransactionModalProps{
     isOpen: boolean;
     onRequestClose: () => void;
 }
-
 export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionModalProps){
     const { createTransaction } = useTransactions();
 
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState(0);
     const [category, setCategory] = useState('');
-    const [type, setType] = useState('deposit');
+    const [tipo, setTipo] = useState('deposit');
+    const [payer, setPayer] = useState('');
 
     async function handleCreateNewTransaction(event: FormEvent){
         event.preventDefault();
@@ -29,14 +29,16 @@ export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionMod
             title,
             amount,
             category,
-            type
+            tipo,
+            payer
         })
 
         setTitle('');
         setAmount(0);
         setCategory('');
-        setType('deposit');
+        setTipo('deposit');
         onRequestClose();
+        setPayer('')
     }
 
     return(
@@ -73,8 +75,8 @@ export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionMod
                 <TransactionTypeContainer>
                     <RadioBox
                         type="button"
-                        onClick={() => setType('deposit')}
-                        isActive={type === 'deposit'}
+                        onClick={() => setTipo('deposit')}
+                        isActive={tipo === 'deposit'}
                         activeColor="green"
                     >
                         <img src={incomeImg} alt="Entrada"/>
@@ -83,8 +85,8 @@ export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionMod
 
                     <RadioBox
                         type="button"
-                        onClick={() => setType('withdraw')}
-                        isActive={type === 'withdraw'}
+                        onClick={() => setTipo('withdraw')}
+                        isActive={tipo === 'withdraw'}
                         activeColor="red"
                     >
                         <img src={outcomeImg} alt="Saída"/>
@@ -97,6 +99,12 @@ export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionMod
                     value={category}
                     onChange={event => setCategory(event.target.value)} 
                 />
+                <input
+                    placeholder="Pagador" 
+                    value={payer}
+                    onChange={event => setPayer(event.target.value)} 
+                />
+
 
                 <button type="submit">
                     Cadastrar
