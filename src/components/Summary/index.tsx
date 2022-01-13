@@ -9,9 +9,10 @@ import { Container } from "./styles";
 
 
 export function Summary(){
-    const { transactions } = useTransactions();
+    const { transactions, filterTransactions } = useTransactions();
+    const rightTransactions = filterTransactions.length > 0 ? filterTransactions : transactions;
 
-    const summary = transactions.reduce((acc, transaction) => {
+    const summary = rightTransactions.reduce((acc, transaction) => {
         if(transaction.tipo === 'deposit') {
             acc.deposits += transaction.amount;
             acc.total += transaction.amount
@@ -54,7 +55,7 @@ export function Summary(){
                     }).format(summary.withdraws)}
                 </strong>
             </div>
-            <div className="highlight-background">
+            <div className={summary.total >= 0 ? 'highlightGreen' : 'highlightRed'}>
                 <header>
                     <p>Total</p>
                     <img src={totalImg} alt="Entradas" />

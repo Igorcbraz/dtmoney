@@ -26,8 +26,13 @@ export const Container = styled.div`
             line-height: 3rem;
         }
 
-        &.highlight-background{
+        &.highlightGreen{
             background: var(--green);
+            color: #FFF;
+        }
+
+        &.highlightRed{
+            background: var(--red);
             color: #FFF;
         }
     }
