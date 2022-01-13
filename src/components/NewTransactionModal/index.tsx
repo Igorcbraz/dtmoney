@@ -14,7 +14,7 @@ interface NewTransactionModalProps{
     onRequestClose: () => void;
 }
 export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionModalProps){
-    const { createTransaction } = useTransactions();
+    const { createTransaction, user } = useTransactions();
 
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState(0);
@@ -30,7 +30,8 @@ export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionMod
             amount,
             category,
             tipo,
-            payer
+            payer,
+            id: user.id
         })
 
         setTitle('');

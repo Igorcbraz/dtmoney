@@ -1,10 +1,10 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { api } from "../services/api";
 import jwt_decode from "jwt-decode";
 
 
 interface Transactions {
-    id: number;
+    id: number | any;
     title: string;
     amount: number;
     tipo: string;
@@ -26,7 +26,7 @@ interface UserInput {
     pass: string;
 }
 
-type TransactionInput = Omit<Transactions, 'id' | 'createdAt'>;
+type TransactionInput = Omit<Transactions, 'createdAt'>;
 
 interface TransactionsProviderProps {
     children: ReactNode;
@@ -67,7 +67,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
             createdAt: new Date(),
         });
         const transaction = response.data;
-        console.log(transaction)
+
         setTransactions([
             ...transactions,
             transaction
