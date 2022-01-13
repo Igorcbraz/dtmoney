@@ -6,9 +6,12 @@ export const Container = styled.div`
     div{
         display: flex;
         justify-content: space-between;
+        align-items: center;
+       
 
         width: 100%;
         margin-bottom: 1rem;
+        overflow-x: auto;
 
         button {
             background-color: transparent;
@@ -36,17 +39,19 @@ export const Container = styled.div`
     table{
         width: 100%;
         border-spacing: 0 0.5rem;
+        display: block;
+        overflow-x: auto;
         
         th{
             color: var(--text-body);
             font-weight: 400;
-            padding: 1rem 2rem;
+            padding: 1rem;
             text-align: left;
             line-height: 1.5rem;
         }
 
-        td{
-            padding: 1rem 2rem;
+        td{   
+            padding: 1rem;
             border: 0;
             background: var(--shape);
             color: var(--text-body);
@@ -65,4 +70,5 @@ export const Container = styled.div`
             }
         }   
     }
-`;
+
+`
