@@ -1,5 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
+import jwt_decode from "jwt-decode";
+
 
 interface Transactions {
     id: number;
@@ -9,6 +11,19 @@ interface Transactions {
     category: string;
     payer: string;
     createdAt: string;
+}
+
+interface User {
+    id: number | null;
+    customer: string | null;
+    email: string | null;
+    createdAt: string | null;
+    status?: string;
+    err?: object;
+}
+interface UserInput {
+    email: string;
+    pass: string;
 }
 
 type TransactionInput = Omit<Transactions, 'id' | 'createdAt'>;
@@ -22,6 +37,9 @@ interface TransactionsContextData {
     createTransaction: (transaction: TransactionInput) => Promise<void>;
     setFilterTransactions: (newTransaction: Transactions[]) => void;
     filterTransactions: Transactions[];
+    loginUser: (user: UserInput) => Promise<User>;
+    user: User;
+    setTransactions: (transaction: Transactions[]) => void;
 }
 
 const TransactionsContext = createContext<TransactionsContextData>(
@@ -31,11 +49,17 @@ const TransactionsContext = createContext<TransactionsContextData>(
 export function TransactionsProvider({ children }: TransactionsProviderProps){
     const [transactions, setTransactions] = useState<Transactions[]>([]);
     const [filterTransactions, setFilterTransactions] = useState<Transactions[]>([]);
+    const [user, setUser] = useState<User | any>(() => {
+        const data = localStorage.getItem('Token');
 
-    useEffect(() => {
-      api.get('transactions')
-        .then(response => setTransactions(response.data))
-    }, [])
+        if (data) {
+          return jwt_decode(data);
+        }
+    
+        return {};
+    });;
+
+    
 
     async function createTransaction(transactionInput: TransactionInput){
         const response = await api.post('transactions', {
@@ -50,8 +74,27 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
         ])
     }
 
+    async function loginUser({email, pass}: UserInput){
+        const { data } = await api.post('login', {
+            email: email,
+            pass: pass
+        });
+
+        if(data.jwt){
+            const user_data = jwt_decode(data.jwt);
+            
+            localStorage.setItem('Token', data.jwt)
+            
+            setUser(user_data);
+        } 
+
+        return user;
+    }
+
     return (
-        <TransactionsContext.Provider value={{ transactions, createTransaction, filterTransactions, setFilterTransactions}}>
+        <TransactionsContext.Provider 
+            value={{ transactions, createTransaction, filterTransactions, setFilterTransactions, loginUser, user, setTransactions}}
+        >
             {children}
         </TransactionsContext.Provider>
     );

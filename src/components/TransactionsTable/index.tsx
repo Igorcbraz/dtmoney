@@ -1,13 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTransactions } from "../../hooks/useTransactions";
 import { Container } from "./styles";
 
+interface Transactions {
+    id: number;
+    title: string;
+    amount: number;
+    tipo: string;
+    category: string;
+    payer: string;
+    createdAt: string;
+}
 
 export function TransactionsTable(){
     const { transactions, filterTransactions, setFilterTransactions } = useTransactions();
     const [numberClicked, setNumberClicked] = useState('');
+    const [rightTransactions, setRightTransactions] = useState<Transactions[]>(transactions)
 
-    const rightTransactions = filterTransactions.length > 0 ? filterTransactions : transactions;
+    useEffect(() => {
+        if(filterTransactions.length > 0){
+            setRightTransactions(filterTransactions)
+        } else {
+            setRightTransactions(transactions)
+        }
+    }, [filterTransactions, transactions])
+    
     function monthFilter(month: string){
         if(numberClicked !== month){
             const filterTransactions = transactions.filter(transaction => transaction.createdAt.split('-')[1] === month);
@@ -53,7 +70,7 @@ export function TransactionsTable(){
                 </thead>
 
                 <tbody>
-                    {rightTransactions.map(transaction => {
+                    {rightTransactions?.map(transaction => {
                       return (
                         <tr key={transaction.id}>
                             <td>{transaction.title}</td>

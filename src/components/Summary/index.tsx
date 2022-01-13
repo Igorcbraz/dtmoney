@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTransactions } from '../../hooks/useTransactions';
 
 import incomeImg from '../../assets/income.svg';
@@ -7,10 +7,28 @@ import totalImg from '../../assets/total.svg';
 
 import { Container } from "./styles";
 
+interface Transactions {
+    id: number;
+    title: string;
+    amount: number;
+    tipo: string;
+    category: string;
+    payer: string;
+    createdAt: string;
+}
 
 export function Summary(){
     const { transactions, filterTransactions } = useTransactions();
-    const rightTransactions = filterTransactions.length > 0 ? filterTransactions : transactions;
+    const [rightTransactions, setRightTransactions] = useState<Transactions[]>(transactions)
+
+    useEffect(() => {
+        if(filterTransactions.length > 0){
+            setRightTransactions(filterTransactions)
+        } else {
+            setRightTransactions(transactions)
+        }
+    }, [filterTransactions, transactions])
+
 
     const summary = rightTransactions.reduce((acc, transaction) => {
         if(transaction.tipo === 'deposit') {
