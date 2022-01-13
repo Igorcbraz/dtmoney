@@ -39,9 +39,14 @@ export const Container = styled.div`
     table{
         width: 100%;
         border-spacing: 0 0.5rem;
-        display: block;
         overflow-x: auto;
         
+        @media only screen and (max-width: 520px) {
+            &{
+                display:block;
+            }
+        }
+
         th{
             color: var(--text-body);
             font-weight: 400;
