@@ -15,6 +15,7 @@ export function Home(){
     useEffect(() => {
         if(!user.id){
             navigate('/Login')
+            return;
         }
 
         api.get(`transactions/${user?.id}`)

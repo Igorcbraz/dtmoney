@@ -21,11 +21,13 @@ interface User {
     status?: string;
     err?: object;
 }
-interface UserInput {
+interface UserInputRegister {
+    name: string;
     email: string;
     pass: string;
 }
 
+type UserInputLogin   = Omit<UserInputRegister, 'name'>
 type TransactionInput = Omit<Transactions, 'createdAt'>;
 
 interface TransactionsProviderProps {
@@ -37,9 +39,10 @@ interface TransactionsContextData {
     createTransaction: (transaction: TransactionInput) => Promise<void>;
     setFilterTransactions: (newTransaction: Transactions[]) => void;
     filterTransactions: Transactions[];
-    loginUser: (user: UserInput) => Promise<User>;
+    loginUser: (user: UserInputLogin) => Promise<User>;
     user: User;
     setTransactions: (transaction: Transactions[]) => void;
+    registerUser: (user: UserInputRegister) => Promise<User>;
 }
 
 const TransactionsContext = createContext<TransactionsContextData>(
@@ -74,12 +77,31 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
         ])
     }
 
-    async function loginUser({email, pass}: UserInput){
+    async function loginUser({email, pass}: UserInputLogin){
         const { data } = await api.post('login', {
             email: email,
             pass: pass
         });
+        console.log(data)
+        if(data.jwt){
+            const user_data = jwt_decode(data.jwt);
+            
+            localStorage.setItem('Token', data.jwt)
+            
+            setUser(user_data);
+        } 
 
+        return user;
+    }
+
+    async function registerUser({name, pass, email}: UserInputRegister){
+        const { data } = await api.post('register', {
+            customer: name,
+            pass: pass,
+            email: email,
+            createdAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
+        });
+        console.log(data)
         if(data.jwt){
             const user_data = jwt_decode(data.jwt);
             
@@ -93,7 +115,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
 
     return (
         <TransactionsContext.Provider 
-            value={{ transactions, createTransaction, filterTransactions, setFilterTransactions, loginUser, user, setTransactions}}
+            value={{ transactions, createTransaction, filterTransactions, setFilterTransactions, loginUser, user, setTransactions, registerUser}}
         >
             {children}
         </TransactionsContext.Provider>

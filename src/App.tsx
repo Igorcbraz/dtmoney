@@ -5,6 +5,7 @@ import { TransactionsProvider } from './hooks/useTransactions';
 
 import { Home } from './pages/Home'
 import { Login } from './pages/Login';
+import { Cadastro } from './pages/Cadastro';
 
 import { GlobalStyle } from "./styles/global";
 
@@ -17,6 +18,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/Cadastro" element={<Cadastro />} />
         </Routes>
       </TransactionsProvider>
 

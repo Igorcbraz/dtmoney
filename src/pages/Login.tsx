@@ -15,8 +15,8 @@ export function Login(){
         event.preventDefault();
 
         const response = await loginUser({
-            email: email,
-            pass: pass
+            email: email.trim(),
+            pass: pass.trim()
         });
 
         if(response.status){
@@ -28,7 +28,7 @@ export function Login(){
 
     return(
         <>
-            <Header label="Cadastrar" onOpenNewTransactionModal={() => navigate('/Cadastrar')}/>
+            <Header label="Cadastrar" onOpenNewTransactionModal={() => navigate('/Cadastro')}/>
             <FormLogin onSubmit={handleLogin}>
                 <div>
                     <h1>Para controlar seus gastos <span>Realize o Login</span></h1>
