@@ -43,6 +43,7 @@ interface TransactionsContextData {
     user: User;
     setTransactions: (transaction: Transactions[]) => void;
     registerUser: (user: UserInputRegister) => Promise<User>;
+    logout: () => void;
 }
 
 const TransactionsContext = createContext<TransactionsContextData>(
@@ -50,7 +51,15 @@ const TransactionsContext = createContext<TransactionsContextData>(
 );
 
 export function TransactionsProvider({ children }: TransactionsProviderProps){
-    const [transactions, setTransactions] = useState<Transactions[]>([]);
+    const [transactions, setTransactions] = useState<Transactions[]>(() => {
+        const transactionsLocalStorage = localStorage.getItem('Transactions');
+        
+        if (transactionsLocalStorage) {
+          return JSON.parse(transactionsLocalStorage);
+        }
+    
+        return [];
+    });
     const [filterTransactions, setFilterTransactions] = useState<Transactions[]>([]);
     const [user, setUser] = useState<User | any>(() => {
         const data = localStorage.getItem('Token');
@@ -70,11 +79,21 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
             createdAt: new Date(),
         });
         const transaction = response.data;
+        
+        if(transaction.status){
+            console.log(transaction.status);
+            return;
+        }
 
         setTransactions([
             ...transactions,
             transaction
         ])
+
+        localStorage.setItem('Transactions', JSON.stringify([
+            ...transactions,
+            transaction
+        ]))
     }
 
     async function loginUser({email, pass}: UserInputLogin){
@@ -82,7 +101,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
             email: email,
             pass: pass
         });
-        console.log(data)
+
         if(data.jwt){
             const user_data = jwt_decode(data.jwt);
             
@@ -101,7 +120,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
             email: email,
             createdAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
         });
-        console.log(data)
+
         if(data.jwt){
             const user_data = jwt_decode(data.jwt);
             
@@ -113,9 +132,13 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
         return user;
     }
 
+    function logout(){
+        setUser(null);
+    }
+
     return (
         <TransactionsContext.Provider 
-            value={{ transactions, createTransaction, filterTransactions, setFilterTransactions, loginUser, user, setTransactions, registerUser}}
+            value={{ transactions, createTransaction, filterTransactions, setFilterTransactions, loginUser, user, setTransactions, registerUser, logout}}
         >
             {children}
         </TransactionsContext.Provider>

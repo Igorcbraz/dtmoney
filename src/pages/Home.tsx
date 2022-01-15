@@ -8,7 +8,7 @@ import { useNavigate } from "react-router";
 
 
 export function Home(){
-    const { setTransactions, user } = useTransactions();
+    const { setTransactions, user, transactions } = useTransactions();
     const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -18,8 +18,18 @@ export function Home(){
             return;
         }
 
-        api.get(`transactions/${user?.id}`)
-          .then(response => setTransactions(response.data));
+        if(!localStorage.getItem('Transactions')){
+            api.get(`transactions/${user?.id}`)
+            .then(response => {
+              if(!response.data.status){
+                  setTransactions(response.data);
+                  localStorage.setItem('Transactions', JSON.stringify(response.data));
+              } else {
+                  console.log('Houve um erro ao carregar as transações')
+                  console.error(response.data)
+              }
+            });
+        }
     }, [])
 
     function handleOpenNewTransactionModal(){
@@ -32,7 +42,7 @@ export function Home(){
 
     return(
         <>
-            <Header label="Nova transação" onOpenNewTransactionModal={handleOpenNewTransactionModal}/>
+            <Header label="Nova transação" onOpenNewTransactionModal={handleOpenNewTransactionModal} userName/>
             <Dashboard/>
             <NewTransactionModal
                 isOpen={isNewTransactionModalOpen}

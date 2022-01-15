@@ -23,9 +23,9 @@ export function Cadastro(){
         }
 
         const response = await registerUser({
-            name: name,
-            pass: pass,
-            email: email,
+            name: name.trim(),
+            pass: pass.trim(),
+            email: email.trim(),
         });
 
         if(response.status){

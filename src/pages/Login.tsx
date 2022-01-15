@@ -1,9 +1,10 @@
 import { Header } from "../components/Header";
 import { useNavigate } from "react-router";
 
-import { FormLogin } from '../styles/login'
 import { FormEvent, useState } from "react";
 import { useTransactions } from "../hooks/useTransactions";
+
+import { FormLogin } from '../styles/login';
 
 export function Login(){
     const { loginUser } = useTransactions();
