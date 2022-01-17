@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import { useTransactions } from "../../hooks/useTransactions";
+
+import { EditTransactionModal } from "../EditTransactionModal";
+import { DeleteTransactionModal } from "../DeleteTransactionModal";
+
+import { ReactComponent as Trash } from '../../assets/trash.svg';
+import { ReactComponent as Pencil } from '../../assets/pencil.svg';
 import { Container } from "./styles";
 
 interface Transactions {
+    FK_id_user?: number;
     id: number;
     title: string;
     amount: number;
@@ -16,6 +23,10 @@ export function TransactionsTable(){
     const { transactions, filterTransactions, setFilterTransactions } = useTransactions();
     const [numberClicked, setNumberClicked] = useState('');
     const [rightTransactions, setRightTransactions] = useState<Transactions[]>(transactions)
+
+    const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] = useState(false);
+    const [isDeleteTransactionModalOpen, setIsDeleteTransactionModalOpen] = useState(false);
+    const [actionTransactionModal, setActionTransactionModal] = useState<Transactions>({} as Transactions);
 
     useEffect(() => {
         if(filterTransactions.length > 0){
@@ -42,6 +53,26 @@ export function TransactionsTable(){
         }
     }
 
+    // Edit
+    function handleOpenEditTransactionModal(currentlyTransaction: Transactions){
+        setActionTransactionModal(currentlyTransaction);
+        setIsEditTransactionModalOpen(true);
+    }
+
+    function handleCloseEditTransactionModal(){
+        setIsEditTransactionModalOpen(false);
+    }
+
+    // Delete
+    function handleOpenDeleteTransactionModal(currentlyTransaction: Transactions){
+        setActionTransactionModal(currentlyTransaction);
+        setIsDeleteTransactionModalOpen(true);
+    }
+
+    function handleCloseDeleteTransactionModal(){
+        setIsDeleteTransactionModalOpen(false);
+    }
+
     return(
         <Container>
             <div>
@@ -66,6 +97,7 @@ export function TransactionsTable(){
                         <th>Categoria</th>
                         <th>Pagador(a)</th>
                         <th>Data</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
 
@@ -87,11 +119,31 @@ export function TransactionsTable(){
                             <td>
                                 {new Intl.DateTimeFormat('pt-BR').format(new Date(transaction.createdAt))}
                             </td>
+                            <td id='actions'>
+                                <button onClick={() => handleOpenEditTransactionModal(transaction)}>
+                                    <Pencil/>
+                                </button>
+                                <button onClick={() => handleOpenDeleteTransactionModal(transaction)}>
+                                    <Trash/>
+                                </button>
+                            </td>
                         </tr>
                       );
                     })}
                 </tbody>
             </table>
+            
+            <EditTransactionModal
+                isOpen={isEditTransactionModalOpen}
+                onRequestClose={handleCloseEditTransactionModal}
+                transaction={actionTransactionModal}
+            />
+            <DeleteTransactionModal
+                isOpen={isDeleteTransactionModalOpen}
+                onRequestClose={handleCloseDeleteTransactionModal}
+                transactionId={actionTransactionModal.id}
+                userId={actionTransactionModal.FK_id_user}
+            />
         </Container>
     );
 }

@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useTransactions } from '../../hooks/useTransactions';
 
@@ -6,23 +6,43 @@ import closeImg from '../../assets/close.svg';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
 
-import { Container, RadioBox, TransactionTypeContainer } from './style';
+import { Container, RadioBox, TransactionTypeContainer } from '../NewTransactionModal/style';
 
+interface Transactions {
+    FK_id_user?: number;
+    id: number;
+    title: string;
+    amount: number;
+    tipo: string;
+    category: string;
+    payer: string;
+    createdAt: string;
+}
 
-interface NewTransactionModalProps{
+interface EditTransactionModalProps{
     isOpen: boolean;
     onRequestClose: () => void;
+    transaction: Transactions;
 }
-export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionModalProps){
-    const { createTransaction, user } = useTransactions();
+
+export function EditTransactionModal({ isOpen, onRequestClose, transaction}: EditTransactionModalProps){
+    const { updateTransaction } = useTransactions();
 
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState(0);
     const [category, setCategory] = useState('');
-    const [tipo, setTipo] = useState('deposit');
+    const [tipo, setTipo] = useState('');
     const [payer, setPayer] = useState('');
+    
+    useEffect(() => {
+        setTitle(transaction.title);
+        setAmount(transaction.amount)
+        setCategory(transaction.category)
+        setTipo(transaction.tipo);
+        setPayer(transaction.payer);
+    }, [transaction])
 
-    async function handleCreateNewTransaction(event: FormEvent){
+    async function handleEditTransaction(event: FormEvent){
         event.preventDefault();
 
         if(title.trim()    === '' || amount       === 0  ||
@@ -32,21 +52,21 @@ export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionMod
             return;
         }
 
-        await createTransaction({
+        const response = await updateTransaction({
             title,
             amount,
             category,
             tipo,
             payer,
-            id: user.id
+            id: transaction.id,
+            FK_id_user: transaction.FK_id_user,
+            createdAt: transaction.createdAt
         })
 
-        setTitle('');
-        setAmount(0);
-        setCategory('');
-        setTipo('deposit');
-        onRequestClose();
-        setPayer('')
+        if(response === 1){
+            onRequestClose();
+            alert('Transação alterada com sucesso');
+        }
     }
 
     return(
@@ -64,18 +84,18 @@ export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionMod
                 <img src={closeImg} alt="Fechar modal"/>
             </button>
 
-            <Container onSubmit={handleCreateNewTransaction}>
-                <h2>Cadastrar transação</h2>
+            <Container onSubmit={handleEditTransaction}>
+                <h2>Alterar transação</h2>
 
                 <input
-                    placeholder="Título"
+                    placeholder={transaction.title}
                     value={title}
                     onChange={event => setTitle(event.target.value)} 
                 />
 
                 <input
                     type="number"
-                    placeholder="Valor" 
+                    placeholder={`${transaction.amount}`}
                     value={amount}
                     onChange={event => setAmount(Number(event.target.value))} 
                 />
@@ -103,19 +123,19 @@ export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionMod
                 </TransactionTypeContainer>
 
                 <input
-                    placeholder="Categoria" 
+                    placeholder={transaction.category}
                     value={category}
                     onChange={event => setCategory(event.target.value)} 
                 />
                 <input
-                    placeholder="Pagador" 
+                    placeholder={transaction.payer}
                     value={payer}
                     onChange={event => setPayer(event.target.value)} 
                 />
 
 
                 <button type="submit">
-                    Cadastrar
+                    Alterar
                 </button>
             </Container>
         </Modal>

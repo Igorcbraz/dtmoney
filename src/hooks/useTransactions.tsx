@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 
 
 interface Transactions {
+    FK_id_user?: number;
     id: number | any;
     title: string;
     amount: number;
@@ -39,6 +40,8 @@ interface TransactionsContextData {
     createTransaction: (transaction: TransactionInput) => Promise<void>;
     setFilterTransactions: (newTransaction: Transactions[]) => void;
     filterTransactions: Transactions[];
+    deleteTransaction: (id : number, userId?: number) => Promise<1 | 0>;
+    updateTransaction: (transaction : Transactions) => Promise<1 | 0>
     loginUser: (user: UserInputLogin) => Promise<User>;
     user: User;
     setTransactions: (transaction: Transactions[]) => void;
@@ -71,7 +74,6 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
         return {};
     });;
 
-    
 
     async function createTransaction(transactionInput: TransactionInput){
         const response = await api.post('transactions', {
@@ -94,6 +96,42 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
             ...transactions,
             transaction
         ]))
+    }
+
+    async function deleteTransaction(transactionId: number, userId?: number){
+        const { data } = await api.delete(`transactions/${transactionId}/${userId}`);
+
+        if(data === 0 || data.status){
+            console.error(data);
+            return 0;
+        } else {
+            localStorage.setItem('Transactions', JSON.stringify(data));
+            setTransactions(data);
+
+            return 1;
+        }
+    }
+
+    async function updateTransaction(transaction : Transactions){
+        const { data } = await api.put('transactions', {
+            title: transaction.title,
+            amount: transaction.amount,
+            tipo: transaction.tipo,
+            category: transaction.category,
+            payer: transaction.payer,
+            id: transaction.id,
+            FK_id_user: transaction.FK_id_user
+        });
+
+        if(data === 0 || data.status){
+            console.log(data);
+            return 0;
+        } else {
+            localStorage.setItem('Transactions', JSON.stringify(data));
+            setTransactions(data);
+
+            return 1;
+        }
     }
 
     async function loginUser({email, pass}: UserInputLogin){
@@ -138,7 +176,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
 
     return (
         <TransactionsContext.Provider 
-            value={{ transactions, createTransaction, filterTransactions, setFilterTransactions, loginUser, user, setTransactions, registerUser, logout}}
+            value={{ transactions, createTransaction, filterTransactions, setFilterTransactions, updateTransaction, deleteTransaction, loginUser, user, setTransactions, registerUser, logout}}
         >
             {children}
         </TransactionsContext.Provider>

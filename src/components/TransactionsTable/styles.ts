@@ -73,6 +73,21 @@ export const Container = styled.div`
             &.withdraw {
                 color: var(--red);
             }
+
+            &#actions button:first-child{
+                margin-right: 1rem;
+            }
+
+            button {
+                background-color: transparent;
+                border: 0;
+
+                transition: 0.2s filter;
+
+                &:hover{
+                    filter: brightness(0.7);
+                }
+            }
         }   
     }
 

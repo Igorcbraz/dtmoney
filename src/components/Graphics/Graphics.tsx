@@ -3,6 +3,7 @@ import {
     VerticalBarSeries,
     HorizontalGridLines,
     VerticalGridLines,
+    LineSeries,
     XAxis,
     YAxis
 } from 'react-vis';
@@ -18,22 +19,50 @@ interface GraphicsProps{
 export function Graphics({ whichGraphic } : GraphicsProps){
     const { transactions } = useTransactions();
 
-    const deposits  = transactions.filter(transaction => transaction.tipo === 'deposit')
-    const withdraws = transactions.filter(transaction => transaction.tipo === 'withdraw')
+    const deposits  = transactions.filter(transaction => transaction.tipo === 'deposit');
+    const withdraws = transactions.filter(transaction => transaction.tipo === 'withdraw');
     
-    const dataDeposits = deposits.map((deposit, index) => {
+    const copyDeposits = [...deposits];
+    const dataDeposits = copyDeposits.map((deposit, index, transactions) => {   
+        if(transactions[index + 1] !== undefined){           
+            if(new Intl.DateTimeFormat('pt-BR').format(new Date(deposit.createdAt)) === new Intl.DateTimeFormat('pt-BR').format(new Date(transactions[index + 1].createdAt))){
+                const data = {
+                    x: `${new Intl.DateTimeFormat('pt-BR').format(new Date(deposit.createdAt))}`,
+                    y: deposit.amount + transactions[index + 1].amount
+                }
+
+                transactions.splice(index, 1)
+                return data;
+            }
+        }
+
         return {
             x: `${new Intl.DateTimeFormat('pt-BR').format(new Date(deposit.createdAt))}`,
             y: deposit.amount
         }
     })
 
-    const dataWithdraws = withdraws.map((withdraw, index) => {
+
+    const copyWithdraws = [...withdraws];
+    const dataWithdraws = copyWithdraws.map((withdraw, index, transactions) => {
+        if(transactions[index + 1] !== undefined){           
+            if(new Intl.DateTimeFormat('pt-BR').format(new Date(withdraw.createdAt)) === new Intl.DateTimeFormat('pt-BR').format(new Date(transactions[index + 1].createdAt))){
+                const data = {
+                    x: `${new Intl.DateTimeFormat('pt-BR').format(new Date(withdraw.createdAt))}`,
+                    y: withdraw.amount + transactions[index + 1].amount
+                }
+
+                transactions.splice(index, 1)
+                return data;
+            }
+        }
+
         return {
             x: `${new Intl.DateTimeFormat('pt-BR').format(new Date(withdraw.createdAt))}`,
             y: withdraw.amount
         }
     })
+
 
     switch (whichGraphic) {
         case 'deposits/withdraws':
@@ -55,6 +84,10 @@ export function Graphics({ whichGraphic } : GraphicsProps){
                         <YAxis />
                         <HorizontalGridLines />
                         <VerticalGridLines/>
+
+                        <LineSeries
+
+                        />
                         <VerticalBarSeries barWidth={0.5}
                             data={dataDeposits}
                             color="#33cc95"
