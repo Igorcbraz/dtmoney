@@ -74,6 +74,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
         return {};
     });;
 
+    window.addEventListener("beforeunload", logout)
 
     async function createTransaction(transactionInput: TransactionInput){
         const response = await api.post('transactions', {
@@ -171,7 +172,8 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
     }
 
     function logout(){
-        setUser(null);
+        localStorage.removeItem('Token');
+        localStorage.removeItem('Transactions');
     }
 
     return (
