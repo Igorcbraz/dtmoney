@@ -11,8 +11,8 @@ export const Container = styled.div`
     margin-top: -8rem;
 
     #error{
-        width: 500px;
-        height: 300px;
+        width: 100%;
+        height: 400px;
 
         display: flex;
         align-items: center;
@@ -40,8 +40,13 @@ export const Container = styled.div`
     img {
         height: 15rem;
     }
+    .rv-xy-plot {
+        margin: 0 auto;
+    }
 
     #depositsWithdraws {
+        width: 100%;
+
         span {
             display: flex;
             justify-content: space-around;
@@ -52,6 +57,7 @@ export const Container = styled.div`
                 align-items: center;
                 gap: 1rem;
                 flex-direction: row;
+                margin: 1.2rem 0;
             }
             h2::before {
                 content: '';
@@ -62,8 +68,15 @@ export const Container = styled.div`
                 margin: 0;
                 background-color: var(--green);
             }
-            h2:last-child::before {background-color: var(--red);}
+            #saidas::before {background-color: var(--red);}
+            #total::before  {background-color: var(--blue);}
         }
+    }
+
+    #category{
+        position: relative;
+        width: 40%;
+        padding: 0;
     }
 
     & .shape{
