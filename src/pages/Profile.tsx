@@ -1,3 +1,4 @@
+// tslint:disable:no-var-requires
 import { Header } from "../components/Header";
 import { useNavigate } from "react-router";
 import { useTransactions } from "../hooks/useTransactions";

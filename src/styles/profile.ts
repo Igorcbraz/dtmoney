@@ -75,8 +75,7 @@ export const Container = styled.div`
 
     #category{
         position: relative;
-        width: 40%;
-        padding: 0;
+        width: 60%;
     }
 
     & .shape{
