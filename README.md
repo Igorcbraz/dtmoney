@@ -14,16 +14,26 @@ Projeto Ignite ReactJs, na <a href="https://rocketseat.com.br/"><em>Rocketseat</
 Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [React](https://reactjs.org)
 - [TypeScript](https://www.typescriptlang.org/)
-- [MirageJs](https://miragejs.com/)
+- [React-vis](https://uber.github.io/react-vis/)
 - [Styled Components](https://styled-components.com/)
 ## 💻 Projeto
 
-DtMoney é um website para organizar suas finanças, com as opções para adicionar gastos ou ganhos e ter uma métrica sobre esses dados. 
+[DtMoney](https://dtmoney-igorcbraz.netlify.app/) é um website para organizar suas finanças, com as opções para adicionar gastos ou ganhos, excluí-los ou edita-los e com métricas visuais em gráficos. 
 
-Este é um projeto desenvolvido no programa **[Ignite ReactJs](https://www.rocketseat.com.br/ignite)**, feito pela Rocketseat.
+Este é um projeto inicialmente desenvolvido no programa **[Ignite ReactJs](https://www.rocketseat.com.br/ignite)**, feito pela Rocketseat.
+
+## 📐 Ajustes e Melhorias 🔍
+As seguintes funcionalidades foram feitas fora do curso _Ignite ReactJs_:
+
+- [x] Backend em NodeJs
+- [x] Sistema de Login e Cadastro de usuários
+- [x] Filtro de transações por mês
+- [x] Opção de Editar e Excluir transações
+- [x] Gráficos com os dados das transações
+- [x] Responsividade do website 
 
 ## 🔖 Layout
-Você pode acessar o design deesse projeto pelo link abaixo:
+Você pode acessar o design inicial deesse projeto pelo link abaixo:
 
 - [Layout no Figma](https://www.figma.com/file/0xmu9mj2TJYoIOubBFWsk5/dtmoney-Ignite-(Copy)?node-id=0%3A1)
 
