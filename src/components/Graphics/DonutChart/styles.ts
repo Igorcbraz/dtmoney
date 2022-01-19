@@ -9,7 +9,7 @@ export const Container = styled.div`
     & .categories{
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: space-around;
         width: 30%;
     }
 

@@ -16,8 +16,11 @@ interface FlexibleRadialChartData{
     angle: string;
     color: string;
 }
+interface DonutChartProps {
+    whichChart: 'categoriesWithdraw' | 'maxCategory'
+}
 
-export function DonutChart(){
+export function DonutChart({whichChart}: DonutChartProps){
     const { transactions } = useTransactions()
     const FlexibleRadialChart = makeWidthFlexible(RadialChart); 
 
@@ -74,35 +77,55 @@ export function DonutChart(){
         } 
     })
 
-    return(
-        <Container>
-            <div>
-                <h2>Despesas por categoria</h2>
-                <FlexibleRadialChart
-                    colorType="literal"
-                    innerRadius={90}
-                    radius={120}
-                    data={data}
-                    animation={"gentle"}
-                    height={300}
-                />
-            </div>
-
-            <div className="categories">
-                {categoriesArr.map((category: categoryData, index: number) => {
-                    return (
-                        <div id="category">
-                            <h4 style={{color: colors[index]}}>{category.name}</h4>
-                            <p>{new Intl.NumberFormat('pt-BR', {
-                                style: 'currency',
-                                currency: 'BRL'
-                            }).format(Number(category.withdraws))}</p>
-                        </div>
-                    )
-                })}
-            </div>
-            
-        </Container>
+    switch(whichChart){
+        case 'categoriesWithdraw':
+            return(
+                <Container>
+                    <div>
+                        <h2>Despesas por categoria</h2>
+                        <FlexibleRadialChart
+                            colorType="literal"
+                            innerRadius={90}
+                            radius={120}
+                            data={data}
+                            animation={"gentle"}
+                            height={300}
+                        />
+                    </div>
         
-    )
+                    <div className="categories">
+                        {categoriesArr.map((category: categoryData, index: number) => {
+                            if(category.withdraws !== 0){
+                                return (
+                                    <div id="category">
+                                        <h4 style={{color: colors[index]}}>{category.name}</h4>
+                                        <p>{new Intl.NumberFormat('pt-BR', {
+                                            style: 'currency',
+                                            currency: 'BRL'
+                                        }).format(Number(category.withdraws))}</p>
+                                    </div>
+                                )
+                            } 
+                        })}
+                    </div>
+                </Container>   
+            )
+        case 'maxCategory': 
+            return(
+                <Container>
+                    <div>
+                        <h2>Despesas por categoria</h2>
+                        <FlexibleRadialChart
+                            colorType="literal"
+                            innerRadius={90}
+                            radius={120}
+                            data={data}
+                            animation={"gentle"}
+                            height={300}
+                        />
+                    </div>
+                </Container>
+            )
+    }
+    
 }
