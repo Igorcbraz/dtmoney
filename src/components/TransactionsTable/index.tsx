@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTransactions } from "../../hooks/useTransactions";
+import { FormatPaginationTransactions } from "../../utils/FormatPaginationTransactions";
 
 import { EditTransactionModal } from "../EditTransactionModal";
 import { DeleteTransactionModal } from "../DeleteTransactionModal";
@@ -21,7 +22,7 @@ interface Transactions {
 }
 
 export function TransactionsTable(){
-    const { transactions, filterTransactions } = useTransactions();
+    const { transactions, filterTransactions, currentPage } = useTransactions();
     const [rightTransactions, setRightTransactions] = useState<Transactions[]>(transactions)
 
     const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] = useState(false);
@@ -30,13 +31,13 @@ export function TransactionsTable(){
 
     useEffect(() => {
         if(filterTransactions.length > 0){
-            setRightTransactions(filterTransactions)
+            setRightTransactions(FormatPaginationTransactions(filterTransactions)[currentPage])
         } else {
-            setRightTransactions(transactions)
+            setRightTransactions(FormatPaginationTransactions(transactions)[currentPage])
         }
-    }, [filterTransactions, transactions])
+        
+    }, [filterTransactions, transactions, currentPage])
     
-
     // Edit
     function handleOpenEditTransactionModal(currentlyTransaction: Transactions){
         setActionTransactionModal(currentlyTransaction);

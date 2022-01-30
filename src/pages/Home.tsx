@@ -7,27 +7,27 @@ import { Dashboard } from "../components/Dashboard";
 import { Header } from "../components/Header";
 import { NewTransactionModal } from '../components/NewTransactionModal';
 
+import { calculateRange, FormatPaginationTransactions } from "../utils/FormatPaginationTransactions";
 
 export function Home(){
     const { setTransactions, user } = useTransactions();
     const [isNewTransactionModalOpen, setIsNewTransactionModalOpen] = useState(false);
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         if(!user.id){
             navigate('/Login')
             return;
         }
-
         if(!localStorage.getItem('Transactions')){
             api.get(`transactions/${user?.id}`)
             .then(response => {
               if(!response.data.status){
-                  setTransactions(response.data);
-                  localStorage.setItem('Transactions', JSON.stringify(response.data));
+                setTransactions(response.data);
+                localStorage.setItem('Transactions', JSON.stringify(response.data));
               } else {
-                  console.log('Houve um erro ao carregar as transações')
-                  console.error(response.data)
+                console.log('Houve um erro ao carregar as transações')
+                console.error(response.data)
               }
             });
         }
@@ -40,7 +40,6 @@ export function Home(){
     function handleCloseNewTransactionModal(){
         setIsNewTransactionModalOpen(false)
     }
-
     return(
         <>
             <Header label="Nova transação" onOpenNewTransactionModal={handleOpenNewTransactionModal} userName/>

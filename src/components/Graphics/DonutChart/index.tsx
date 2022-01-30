@@ -65,10 +65,13 @@ export function DonutChart({whichChart}: DonutChartProps){
     })
     
     const colors = [
-        '#E52E40',
-        '#33cc95',
         '#5429CC',
-        '#363F5F'
+        '#4421a3',
+        '#311975',
+        '#784dec',
+        '#9779e9',
+        '#c4b7ec',
+        '#291561',
     ]
     const data = categoriesArr.map((category: categoryData, index: number) => {
         return {

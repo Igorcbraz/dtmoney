@@ -42,11 +42,16 @@ interface TransactionsContextData {
     filterTransactions: Transactions[];
     deleteTransaction: (id : number, userId?: number) => Promise<1 | 0>;
     updateTransaction: (transaction : Transactions) => Promise<1 | 0>
+    
+
     loginUser: (user: UserInputLogin) => Promise<User>;
     user: User;
     setTransactions: (transaction: Transactions[]) => void;
     registerUser: (user: UserInputRegister) => Promise<User>;
     logout: () => void;
+
+    currentPage: number;
+    setCurrentPage: (page: number) => void;
 }
 
 const TransactionsContext = createContext<TransactionsContextData>(
@@ -73,6 +78,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
     
         return {};
     });;
+    const [currentPage, setCurrentPage] = useState(0);
 
     window.addEventListener("beforeunload", logout)
 
@@ -172,13 +178,18 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
     }
 
     function logout(){
-        localStorage.removeItem('Token');
-        localStorage.removeItem('Transactions');
+        // localStorage.removeItem('Token');
+        // localStorage.removeItem('Transactions');
     }
 
     return (
         <TransactionsContext.Provider 
-            value={{ transactions, createTransaction, filterTransactions, setFilterTransactions, updateTransaction, deleteTransaction, loginUser, user, setTransactions, registerUser, logout}}
+            value={{ 
+                transactions     , createTransaction, filterTransactions, setFilterTransactions,
+                updateTransaction, deleteTransaction, setCurrentPage    , currentPage          ,
+                
+                loginUser, user, setTransactions, registerUser, logout
+            }}
         >
             {children}
         </TransactionsContext.Provider>
