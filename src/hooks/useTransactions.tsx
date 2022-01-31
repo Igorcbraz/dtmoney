@@ -52,6 +52,8 @@ interface TransactionsContextData {
 
     currentPage: number;
     setCurrentPage: (page: number) => void;
+    rangePagination: number;
+    setRangePagination: (range: number) => void;
 }
 
 const TransactionsContext = createContext<TransactionsContextData>(
@@ -79,6 +81,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
         return {};
     });;
     const [currentPage, setCurrentPage] = useState(0);
+    const [rangePagination, setRangePagination] = useState(5)
 
     window.addEventListener("beforeunload", logout)
 
@@ -185,8 +188,9 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
     return (
         <TransactionsContext.Provider 
             value={{ 
-                transactions     , createTransaction, filterTransactions, setFilterTransactions,
-                updateTransaction, deleteTransaction, setCurrentPage    , currentPage          ,
+                transactions     , createTransaction , filterTransactions, setFilterTransactions,
+                updateTransaction, deleteTransaction , setCurrentPage    , currentPage          ,
+                rangePagination  , setRangePagination,
                 
                 loginUser, user, setTransactions, registerUser, logout
             }}

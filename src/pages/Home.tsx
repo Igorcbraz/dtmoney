@@ -7,7 +7,6 @@ import { Dashboard } from "../components/Dashboard";
 import { Header } from "../components/Header";
 import { NewTransactionModal } from '../components/NewTransactionModal';
 
-import { calculateRange, FormatPaginationTransactions } from "../utils/FormatPaginationTransactions";
 
 export function Home(){
     const { setTransactions, user } = useTransactions();

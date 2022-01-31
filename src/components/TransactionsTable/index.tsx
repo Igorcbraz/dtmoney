@@ -22,7 +22,7 @@ interface Transactions {
 }
 
 export function TransactionsTable(){
-    const { transactions, filterTransactions, currentPage } = useTransactions();
+    const { transactions, filterTransactions, currentPage, rangePagination } = useTransactions();
     const [rightTransactions, setRightTransactions] = useState<Transactions[]>(transactions)
 
     const [isEditTransactionModalOpen, setIsEditTransactionModalOpen] = useState(false);
@@ -31,12 +31,12 @@ export function TransactionsTable(){
 
     useEffect(() => {
         if(filterTransactions.length > 0){
-            setRightTransactions(FormatPaginationTransactions(filterTransactions)[currentPage])
+            setRightTransactions(FormatPaginationTransactions(filterTransactions, rangePagination)[currentPage])
         } else {
-            setRightTransactions(FormatPaginationTransactions(transactions)[currentPage])
+            setRightTransactions(FormatPaginationTransactions(transactions, rangePagination)[currentPage])
         }
         
-    }, [filterTransactions, transactions, currentPage])
+    }, [filterTransactions, transactions, currentPage, rangePagination])
     
     // Edit
     function handleOpenEditTransactionModal(currentlyTransaction: Transactions){
