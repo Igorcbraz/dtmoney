@@ -181,8 +181,8 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
     }
 
     function logout(){
-        // localStorage.removeItem('Token');
-        // localStorage.removeItem('Transactions');
+        localStorage.removeItem('Token');
+        localStorage.removeItem('Transactions');
     }
 
     return (
