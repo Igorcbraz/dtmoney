@@ -31,6 +31,7 @@ As seguintes funcionalidades foram feitas fora do curso _Ignite ReactJs_:
 - [x] Opção de Editar e Excluir transações
 - [x] Gráficos com os dados das transações
 - [x] Responsividade do website 
+- [x] Paginação das transações 
 
 ## 🔖 Layout
 Você pode acessar o design inicial deesse projeto pelo link abaixo:

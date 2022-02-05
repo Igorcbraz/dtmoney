@@ -184,7 +184,6 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
     function logout(){
         localStorage.clear()
         window.location.href = '/';
-         
     }
 
     return (
