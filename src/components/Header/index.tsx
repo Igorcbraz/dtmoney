@@ -17,16 +17,22 @@ export function Header({ onOpenNewTransactionModal, label, userName = false }: H
     const { user, logout } = useTransactions(); 
     const navigate = useNavigate();
 
-    if(window.innerWidth >= 530) {
+    if(window.innerWidth >= 680) {
         return (
             <Container>
                 <Content id='content'>
                     <img src={logoImg} alt="dt money" title="dt money"/>
                     {userName && (
-                        <button type="button" onClick={() => navigate('/Profile')} id="btnUser">
-                            {user.customer}
-                        </button>
+                        <div>
+                            <button type="button" onClick={() => navigate('/Profile')} id="btnUser">
+                                {user.customer}
+                            </button>
+                            <button onClick={logout} id="logout">
+                            Sair
+                            </button>
+                        </div>
                     )}
+                    
                     <button type="button" onClick={onOpenNewTransactionModal}>
                         {label}
                     </button>  
@@ -41,12 +47,15 @@ export function Header({ onOpenNewTransactionModal, label, userName = false }: H
                         <Menu pageWrapId={"page-wrap"} outerContainerId={"teste"}>
                             <img src={logoImg} alt="dt money" title="dt money" id="dtMoney"/>
                             {userName && (
-                                <button type="button" onClick={() => navigate('/Profile')} id="btnUser">
+                                <button type="button" onClick={() => navigate('/Profile')}>
                                     Meu perfil e Gráficos
                                 </button>
                             )}
                             <button type="button" onClick={onOpenNewTransactionModal}>
                                 {label}
+                            </button>
+                            <button onClick={logout} id="logout">
+                                Sair
                             </button>
                         </Menu>    
                     </MenuStyles>

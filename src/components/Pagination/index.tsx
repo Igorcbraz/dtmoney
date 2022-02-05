@@ -37,40 +37,63 @@ export function Pagination(){
                 />
             </RangePagination>
             <PaginationStyle>
-                <button className='arrows' onClick={handleBackPage}>&#60;</button>
+                <button 
+                    className={`arrows ${paginationRange.length < 5 && `buttonDisabled`}`}
+                    onClick={handleBackPage}
+                    disabled={paginationRange.length < 5 ? true : false}
+                >
+                    &#60;
+                </button>
 
-                <button 
-                    onClick={() => setCurrentPage(paginationRange[contPagination] - 1)}
-                    className={currentPage === paginationRange[contPagination] - 1 ? 'active' : ''}
-                >
-                    {paginationRange[contPagination]}
-                </button>
-                <button 
-                    onClick={() => setCurrentPage(paginationRange[contPagination])}
-                    className={currentPage === paginationRange[contPagination] ? 'active' : ''}
-                >
-                    {paginationRange[contPagination + 1]}
-                </button>
-                <button 
+                {paginationRange[contPagination] && (
+                    <button 
+                        onClick={() => setCurrentPage(paginationRange[contPagination] - 1)}
+                        className={currentPage === paginationRange[contPagination] - 1 ? 'active' : ''}
+                    >
+                        {paginationRange[contPagination]}
+                    </button>
+                )}
+                {paginationRange[contPagination + 1] && (
+                    <button 
+                        onClick={() => setCurrentPage(paginationRange[contPagination])}
+                        className={currentPage === paginationRange[contPagination] ? 'active' : ''}
+                    >
+                        {paginationRange[contPagination + 1]}
+                    </button>
+                )}
+                {paginationRange[contPagination + 2] && (
+                    <button 
                     onClick={() => setCurrentPage(paginationRange[contPagination + 1])}
                     className={currentPage === paginationRange[contPagination + 1] ? 'active' : ''}
-                >
-                    {paginationRange[contPagination + 2]}
-                </button>
-                <button
+                    >
+                        {paginationRange[contPagination + 2]}
+                    </button>
+                )}
+                {paginationRange[contPagination + 3] && (
+                    <button
                     onClick={() => setCurrentPage(paginationRange[contPagination + 2])}
                     className={currentPage === paginationRange[contPagination + 2] ? 'active' : ''}
-                >
-                    {paginationRange[contPagination + 3]}
-                </button>
-                <button
+                    >
+                        {paginationRange[contPagination + 3]}
+                    </button>
+                )}
+                {paginationRange[contPagination + 4] && (
+                    <button
                     onClick={() => setCurrentPage(paginationRange[contPagination + 3])}
                     className={currentPage === paginationRange[contPagination + 3] ? 'active' : ''}
-                >
-                    {paginationRange[contPagination + 4]}
-                </button>
+                    >
+                        {paginationRange[contPagination + 4]}
+                    </button>
+                )}
+                
 
-                <button className='arrows' onClick={handleNextPage}>&#62;</button>
+                <button 
+                    className={`arrows ${paginationRange.length < 5 && `buttonDisabled`}`}
+                    onClick={handleNextPage}
+                    disabled={paginationRange.length < 5 ? true : false}
+                >
+                    &#62;
+                </button>
             </PaginationStyle>
         </Container>
     )

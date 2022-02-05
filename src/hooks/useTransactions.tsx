@@ -1,7 +1,7 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 import jwt_decode from "jwt-decode";
-
+import { useNavigate } from "react-router";
 
 interface Transactions {
     FK_id_user?: number;
@@ -61,6 +61,7 @@ const TransactionsContext = createContext<TransactionsContextData>(
 );
 
 export function TransactionsProvider({ children }: TransactionsProviderProps){
+    const navigate = useNavigate();
     const [transactions, setTransactions] = useState<Transactions[]>(() => {
         const transactionsLocalStorage = localStorage.getItem('Transactions');
         
@@ -83,7 +84,9 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
     const [currentPage, setCurrentPage] = useState(0);
     const [rangePagination, setRangePagination] = useState(5)
 
-    window.addEventListener("beforeunload", logout)
+    if(process.env.REACT_APP_STAGE !== 'dev'){
+        window.addEventListener("beforeunload", logout)
+    }
 
     async function createTransaction(transactionInput: TransactionInput){
         const response = await api.post('transactions', {
@@ -93,7 +96,6 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
         const transaction = response.data;
         
         if(transaction.status){
-            console.log(transaction.status);
             return;
         }
 
@@ -121,7 +123,6 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
             return 1;
         }
     }
-
     async function updateTransaction(transaction : Transactions){
         const { data } = await api.put('transactions', {
             title: transaction.title,
@@ -181,8 +182,9 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
     }
 
     function logout(){
-        // localStorage.removeItem('Token');
-        // localStorage.removeItem('Transactions');
+        localStorage.clear()
+        window.location.href = '/';
+         
     }
 
     return (

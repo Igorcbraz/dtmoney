@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { darken, lighten } from 'polished';
 
 export const Container = styled.header`
     background: var(--blue);
@@ -29,9 +30,21 @@ export const Content = styled.div`
             filter: brightness(0.9);
         }
     }
+
+    #logout{
+        background: var(--blue-light);
+        border-radius: 0 0.25rem 0.25rem 0;
+    }
+    #btnUser{
+        background-color: ${lighten(0.05, '#6933FF')};
+        border-radius: 0.25rem 0 0 0.25rem;
+    }
 `;
 
 export const MenuStyles = styled.div`
+    #logout{
+        background-color: ${lighten(0.13, '#E52E40')};
+    }
     #page-wrap {
         text-align: center;
 

@@ -42,6 +42,9 @@ export const PaginationStyle = styled.div`
             border-color: var(--blue);
         } 
     }
+    .buttonDisabled {
+        pointer-events: none;
+    }
 `
 
 export const RangePagination = styled.div`
