@@ -80,11 +80,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
         return {};
     });;
     const [currentPage, setCurrentPage] = useState(0);
-    const [rangePagination, setRangePagination] = useState(5)
-
-    if(process.env.REACT_APP_STAGE !== 'dev'){
-        window.addEventListener("beforeunload", logout)
-    }
+    const [rangePagination, setRangePagination] = useState(5);
 
     async function createTransaction(transactionInput: TransactionInput){
         const response = await api.post('transactions', {
