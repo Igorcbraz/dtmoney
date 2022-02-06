@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTransactions } from "../../hooks/useTransactions";
+import { toast } from 'react-toastify';
 
 import { MonthFilterStyles } from "./style";
 
@@ -12,7 +13,7 @@ export function MonthFilter(){
             const filterTransactions = transactions.filter(transaction => transaction.createdAt.split('-')[1] === month);
 
             if(filterTransactions.length === 0){
-                alert('Não existem registros no mês selecionado')
+                toast.error('Não existem registros no mês selecionado')
                 return;
             }
 

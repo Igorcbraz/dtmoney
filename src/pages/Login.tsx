@@ -1,27 +1,33 @@
-import { Header } from "../components/Header";
-import { useNavigate } from "react-router";
-
 import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router";
+import { toast } from 'react-toastify';
 import { useTransactions } from "../hooks/useTransactions";
+
+import { Header } from "../components/Header";
+import { Loading } from "../components/Loading";
 
 import { FormLogin } from '../styles/login';
 
 export function Login(){
     const { loginUser } = useTransactions();
     const navigate = useNavigate();
+
     const [email, setEmail] = useState('')
     const [pass, setPass] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     async function handleLogin(event: FormEvent){
         event.preventDefault();
+        setIsLoading(true)
 
         const response = await loginUser({
             email: email.trim(),
             pass: pass.trim()
         });
-
+        console.log(response)
         if(response.status){
-            alert('Houve algum erro ao realizar o login')
+            toast.error('Email ou senha incorretas')
+            setIsLoading(false)
         } else {
             navigate('/')
         }
@@ -31,11 +37,11 @@ export function Login(){
         <>
             <Header label="Cadastrar" onOpenNewTransactionModal={() => navigate('/Cadastro')}/>
             <FormLogin onSubmit={handleLogin}>
-                <div>
+                <div className="formDiv">
                     <h1>Para controlar seus gastos <span>Realize o Login</span></h1>
                     <label>Email</label>
                     <input 
-                        type="text" placeholder="email@exemplo.com" required id="email"
+                        type="email" placeholder="email@exemplo.com" required id="email"
                         onChange={event => setEmail(event.target.value)}
                         value={email}    
                     />
@@ -47,7 +53,11 @@ export function Login(){
                         value={pass}   
                     />
 
-                    <button type="submit">Entrar</button>
+                    <button type="submit">
+                        {isLoading ? (
+                            <Loading width={150} height={40} isWhite/>
+                        ) : 'Entrar'}
+                    </button>
                 </div>
             </FormLogin>
         </>

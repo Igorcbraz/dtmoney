@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useTransactions } from '../../hooks/useTransactions';
+import { toast } from 'react-toastify';
 
 import closeImg from '../../assets/close.svg';
 import incomeImg from '../../assets/income.svg';
@@ -48,7 +49,7 @@ export function EditTransactionModal({ isOpen, onRequestClose, transaction}: Edi
         if(title.trim()    === '' || amount       === 0  ||
            category.trim() === '' || tipo.trim()  === '' ||
            tipo.trim()     === '' || payer.trim() === '') {
-            alert('Todos os campos devem estar preenchidos')
+            toast.error('Todos os campos devem estar preenchidos')
             return;
         }
 
@@ -65,7 +66,7 @@ export function EditTransactionModal({ isOpen, onRequestClose, transaction}: Edi
 
         if(response === 1){
             onRequestClose();
-            alert('Transação alterada com sucesso');
+            toast.success('Transação alterada com sucesso');
         }
     }
 

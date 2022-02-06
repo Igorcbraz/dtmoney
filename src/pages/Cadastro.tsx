@@ -1,8 +1,9 @@
-import { Header } from "../components/Header";
-import { useNavigate } from "react-router";
-
 import { FormEvent, useState } from "react";
 import { useTransactions } from "../hooks/useTransactions";
+import { useNavigate } from "react-router";
+import { toast } from 'react-toastify';
+
+import { Header } from "../components/Header";
 
 import { FormLogin } from '../styles/cadastro'
 
@@ -18,7 +19,7 @@ export function Cadastro(){
         event.preventDefault();
 
         if(pass !== cPass){
-            alert('As senhas são diferentes !')
+            toast.error('As senhas não são iguais')
             return;
         }
 
@@ -29,7 +30,7 @@ export function Cadastro(){
         });
 
         if(response.status){
-            alert('Houve algum erro ao realizar o cadastro')
+            toast.error('Houve algum erro ao realizar o cadastro')
         } else {
             navigate('/')
         }

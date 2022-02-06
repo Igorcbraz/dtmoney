@@ -1,7 +1,6 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { api } from "../services/api";
 import jwt_decode from "jwt-decode";
-import { useNavigate } from "react-router";
 
 interface Transactions {
     FK_id_user?: number;
@@ -61,7 +60,6 @@ const TransactionsContext = createContext<TransactionsContextData>(
 );
 
 export function TransactionsProvider({ children }: TransactionsProviderProps){
-    const navigate = useNavigate();
     const [transactions, setTransactions] = useState<Transactions[]>(() => {
         const transactionsLocalStorage = localStorage.getItem('Transactions');
         
@@ -157,9 +155,10 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
             localStorage.setItem('Token', data.jwt)
             
             setUser(user_data);
+            return user;
         } 
 
-        return user;
+        return data
     }
 
     async function registerUser({name, pass, email}: UserInputRegister){

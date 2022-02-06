@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTransactions } from '../../hooks/useTransactions';
+import CountUp from 'react-countup';
 
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
 import totalImg from '../../assets/total.svg';
 
-import { Container } from "./styles";
+import { Container, Card } from "./style";
 
 interface Transactions {
     id: number;
@@ -48,43 +49,54 @@ export function Summary(){
 
     return(
         <Container>
-            <div>
+            <Card>
                 <header>
                     <p>Entradas</p>
                     <img src={incomeImg} alt="Entradas" />
                 </header>
-                <strong>
-                    {new Intl.NumberFormat('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
-                    }).format(summary.deposits)}
-                </strong>
-            </div>
-            <div>
+                <CountUp
+                    end={summary.deposits}
+                    separator=" "
+                    duration={3}
+                    decimals={2}
+                    decimal=','
+                    prefix="R$ "
+                    preserveValue
+                    className="deposits"
+                />
+            </Card>
+            <Card>
                 <header>
                     <p>Saídas</p>
                     <img src={outcomeImg} alt="Entradas" />
                 </header>
-                <strong>
-                    - 
-                    {new Intl.NumberFormat('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
-                    }).format(summary.withdraws)}
-                </strong>
-            </div>
-            <div className={summary.total >= 0 ? 'highlightGreen' : 'highlightRed'}>
+                <CountUp
+                    end={summary.withdraws}
+                    separator=" "
+                    duration={3}
+                    decimals={2}
+                    decimal=','
+                    prefix="R$ -"
+                    preserveValue
+                    className="deposits"
+                />
+            </Card>
+            <Card haveWithdraws={summary.total >= 0 ? false : true}>
                 <header>
                     <p>Total</p>
                     <img src={totalImg} alt="Entradas" />
                 </header>
-                <strong>
-                    {new Intl.NumberFormat('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL'
-                    }).format(summary.total)}
-                </strong>
-            </div>
+                <CountUp
+                    end={summary.total}
+                    separator=" "
+                    duration={3}
+                    decimals={2}
+                    decimal=','
+                    prefix="R$ "
+                    preserveValue
+                    className="deposits"
+                />
+            </Card>
         </Container>
     );
 }

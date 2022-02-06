@@ -9,6 +9,7 @@ import { ReactComponent as Trash } from '../../assets/trash.svg';
 import { ReactComponent as Pencil } from '../../assets/pencil.svg';
 import { Container } from "./styles";
 import { MonthFilter } from "../MonthFilter";
+import { Loading } from "../Loading";
 
 interface Transactions {
     FK_id_user?: number;
@@ -57,6 +58,8 @@ export function TransactionsTable(){
     function handleCloseDeleteTransactionModal(){
         setIsDeleteTransactionModalOpen(false);
     }
+    
+    if(transactions.length === 0) return <Loading width={400} height={400}/>;
 
     return(
         <Container>
@@ -75,7 +78,7 @@ export function TransactionsTable(){
 
                 <tbody>
                     {rightTransactions?.map(transaction => {
-                      return (
+                        return (
                         <tr key={transaction.id}>
                             <td>{transaction.title}</td>
                             <td className={transaction.tipo}>
@@ -100,7 +103,7 @@ export function TransactionsTable(){
                                 </button>
                             </td>
                         </tr>
-                      );
+                        );
                     })}
                 </tbody>
             </table>

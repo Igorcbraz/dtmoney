@@ -1,6 +1,7 @@
-import { FormEvent, useEffect, useState } from 'react';
-import Modal from 'react-modal';
+import { FormEvent } from 'react';
 import { useTransactions } from '../../hooks/useTransactions';
+import { toast } from 'react-toastify';
+import Modal from 'react-modal';
 
 import closeImg from '../../assets/close.svg';
 import Trash from '../../assets/trash.svg';
@@ -25,7 +26,7 @@ export function DeleteTransactionModal({ isOpen, onRequestClose, transactionId, 
 
         if(response === 1){
             onRequestClose();
-            alert('Transação excluída com sucesso');
+            toast.success('Transação excluída com sucesso');
         }
     }
 

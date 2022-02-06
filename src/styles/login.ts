@@ -6,7 +6,7 @@ export const FormLogin = styled.form`
     justify-content: center;
     margin-top: -10rem;
 
-    div{
+    .formDiv{
         display: flex;
         flex-direction: column;
 
