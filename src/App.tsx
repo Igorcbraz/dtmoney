@@ -9,6 +9,8 @@ import { Cadastro } from './pages/Cadastro';
 
 import { GlobalStyle } from "./styles/global";
 import { Profile } from './pages/Profile';
+import { NewPassword } from './pages/NewPassword';
+import { Landing } from './pages/Landing';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -19,10 +21,12 @@ export function App() {
     <BrowserRouter>
       <TransactionsProvider>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Cadastro" element={<Cadastro />} />
           <Route path="/Profile" element={<Profile />} />
+          <Route path="/newPassword" element={<NewPassword />} />
         </Routes>
       </TransactionsProvider>
 

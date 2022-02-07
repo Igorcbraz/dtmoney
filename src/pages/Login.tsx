@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from 'react-toastify';
 import { useTransactions } from "../hooks/useTransactions";
+import { Link } from 'react-router-dom'
 
 import { Header } from "../components/Header";
 import { Loading } from "../components/Loading";
@@ -24,18 +25,18 @@ export function Login(){
             email: email.trim(),
             pass: pass.trim()
         });
-        console.log(response)
+
         if(response.status){
             toast.error('Email ou senha incorretas')
             setIsLoading(false)
         } else {
-            navigate('/')
+            navigate('/Home')
         }
     }
 
     return(
         <>
-            <Header label="Cadastrar" onOpenNewTransactionModal={() => navigate('/Cadastro')}/>
+            <Header label="Cadastrar" onOpenNewTransactionModal={() => navigate('/Cadastro')} haveHome/>
             <FormLogin onSubmit={handleLogin}>
                 <div className="formDiv">
                     <h1>Para controlar seus gastos <span>Realize o Login</span></h1>
@@ -46,7 +47,11 @@ export function Login(){
                         value={email}    
                     />
 
-                    <label>Senha</label>
+                    <div>
+                        <label>Senha</label>
+                        {/* <Link to='/newPassword'>Esqueci a senha</Link> */}
+                    </div>
+                    
                     <input 
                         type="password" placeholder="***********" required id="pass"
                         onChange={event => setPass(event.target.value)}

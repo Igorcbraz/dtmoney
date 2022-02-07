@@ -178,7 +178,7 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
 
     function logout(){
         localStorage.clear()
-        window.location.href = '/';
+        window.location.href = '/Home';
     }
 
     return (

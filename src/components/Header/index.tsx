@@ -9,11 +9,12 @@ import { Container, Content, MenuStyles } from './styles';
 interface HeaderProps{
     onOpenNewTransactionModal?: () => void;
     label: string;
-    userName?: boolean
+    userName?: boolean;
+    haveHome?: boolean;
 }
 
 
-export function Header({ onOpenNewTransactionModal, label, userName = false }: HeaderProps){
+export function Header({ onOpenNewTransactionModal, label, haveHome, userName = false }: HeaderProps){
     const { user, logout } = useTransactions(); 
     const navigate = useNavigate();
 
@@ -33,9 +34,15 @@ export function Header({ onOpenNewTransactionModal, label, userName = false }: H
                         </div>
                     )}
                     
+                    { haveHome && (
+                        <button type="button" onClick={() => navigate('/')}>
+                            Home
+                        </button>  
+                    )}
+
                     <button type="button" onClick={onOpenNewTransactionModal}>
                         {label}
-                    </button>  
+                    </button>     
                 </Content>
             </Container>
         )

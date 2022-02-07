@@ -6,7 +6,7 @@ export const FormLogin = styled.form`
     justify-content: center;
     margin-top: -10rem;
 
-    .formDiv{
+    div:first-child{
         display: flex;
         flex-direction: column;
 
@@ -16,9 +16,22 @@ export const FormLogin = styled.form`
         border-radius: 0.25rem;
         color: var(--text-title);
 
+        div {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+
+            label {
+                display: flex;
+                flex-direction: column;
+            }
+
+            input{width: 100%;}
+        }
+
         h1 {
             margin: 0 auto;
-            width: 80%;
+            width: 60%;
             text-align: center;
             margin-bottom: 2rem;
             font-size: 2rem;
@@ -33,19 +46,6 @@ export const FormLogin = styled.form`
             margin-bottom: 0.7rem;
         }
 
-        div {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            a {
-                font-size: 0.95rem;
-                margin-bottom: 0.7rem;
-                text-decoration: none;
-                color: var(--green);
-            }
-        }
-
         input {
             background-color: var(--background);
             border: 1px solid var(--background);
@@ -55,7 +55,7 @@ export const FormLogin = styled.form`
             color: var(--text-title);
         }
 
-        #email{
+        #email, #name{
             margin-bottom: 1.5rem;
         }
 
