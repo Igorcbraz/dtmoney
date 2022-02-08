@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { lighten } from 'polished';
 
-export const Container = styled.header`
+export const Container = styled.div`
     background: var(--blue);
     height: 95vh;
 `;
 
-export const Header = styled.div`
+export const Header = styled.header`
     max-width: 1120px;
     margin: 0 auto;
 
@@ -94,9 +94,9 @@ export const Header = styled.div`
     }
 `;
 
-export const Content = styled.main`
+export const Introduction = styled.main`
     max-width: 1120px;
-    margin: 0 auto;
+    margin: 0 auto 4.6rem auto;
     width: 100%;
 
     display: flex;
@@ -153,6 +153,91 @@ export const Content = styled.main`
                 }
             }
         }
+    }
+    .illustration{
+        width: 40%;
+
+        img{
+            width: 100%;
+        }
+    }
+`
+
+export const DesktopSection = styled.section`
+    max-width: 1120px;
+    margin: 0 auto;
+    width: 100%;
+    height: 95vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+
+    .dashboard{
+        span{
+            color: #fff;
+            font-weight: 600;
+            background: #a1ffdd;
+            border-radius: 0.25rem;
+            padding: 0.15rem 1rem;
+
+            display: block;
+            margin-bottom: 0.5rem
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--green);
+        }
+        p {
+            font-size: 1rem;
+            color: #717171;
+            letter-spacing: 0.1rem;
+            margin: 0.5rem 0 2rem 0;
+        }
         
+        div {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 1rem;
+
+            button {
+                display: flex;
+                align-items: center;
+
+                font-size: 1rem;
+                color: #FFF;
+                background: var(--blue-light);
+                border: 0;
+                padding: 1.4rem 1.7rem;
+                border-radius: 0.25rem;
+                height: 1rem;
+
+                transition: filter 0.2s;
+            
+                &:hover{
+                    filter: brightness(0.9);
+                }
+            }
+
+            .outline{
+                background: transparent;
+                color: #baa1ff;
+                text-decoration: underline;
+                
+                transition: 0.4s;
+
+                &:hover {
+                    color: #FFF;
+                    background: #baa1ff;
+                }
+            }
+        }
+    }
+
+    img{
+        width: 100%;
     }
 `

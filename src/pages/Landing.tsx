@@ -5,9 +5,10 @@ import logoImg from '../assets/logo.svg'
 import illustration from '../assets/illustration-green.gif'
 import  chartUp from '../assets/chart-up.svg'
 import  phone from '../assets/phone.svg'
+import desktopMockup from '../assets/desktop-mockup.png';
 
 
-import { Container, Header, Content } from '../styles/landing';
+import { Container, Header, Introduction, DesktopSection } from '../styles/landing';
 
 export function Landing(){
     const navigate = useNavigate();
@@ -28,12 +29,12 @@ export function Landing(){
                     <button type="button" id="login" onClick={() => navigate('/Login')}>
                         Entrar
                     </button>  
-                    <button type="button" id="cadastrar" onClick={() => navigate('/Cadastrar')}>
+                    <button type="button" id="cadastrar" onClick={() => navigate('/Cadastro')}>
                         Cadastrar
                     </button> 
                 </div>
             </Header>
-            <Content>
+            <Introduction>
                 <div className='introduction'>
                     <h1>Simplifique o seu controle <span>financeiro</span></h1>
                     <p>A maneira mais rápida, fácil e simples de controlar seus gastos financeiros e ver métricas claras sobre seus dados</p>
@@ -48,10 +49,28 @@ export function Landing(){
                         </button>
                     </div>
                 </div>
-                <div className="box-shadow">
+                <div className="illustration">
                     <img src={illustration} alt="Money illustration"/>
                 </div>
-            </Content>
+            </Introduction>
+            <DesktopSection>
+                <div>
+                    <img src={desktopMockup} alt="Desktop image" />
+                </div>
+                <div className='dashboard'>
+                    <span>01</span>
+                    <h1>Dashboard.</h1>
+                    <p>Adicione, edite, exclua e veja todas as suas transações no dashboard da sua conta</p>
+                    <div>
+                        <button onClick={() => navigate('/Cadastro')}>
+                            Acessar
+                        </button>
+                        <button className='outline'>
+                           Saiba mais
+                        </button>
+                    </div>
+                </div>
+            </DesktopSection>
         </Container>
     )
 }
