@@ -9,8 +9,7 @@ export const Container = styled.div`
 export const Header = styled.header`
     max-width: 1120px;
     margin: 0 auto;
-
-    padding-top: 2rem;
+    padding: 2rem 0 1rem 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -163,7 +162,7 @@ export const Introduction = styled.main`
     }
 `
 
-export const DesktopSection = styled.section`
+export const SectionStyles = styled.section`
     max-width: 1120px;
     margin: 0 auto;
     width: 100%;
@@ -174,7 +173,7 @@ export const DesktopSection = styled.section`
     justify-content: space-between;
     gap: 3rem;
 
-    .dashboard{
+    .container{
         span{
             color: #fff;
             font-weight: 600;
@@ -239,5 +238,27 @@ export const DesktopSection = styled.section`
 
     img{
         width: 100%;
+    }
+    #cellphone{
+        display: block;
+        width: 85%;
+        margin: 0 auto;
+    }
+`
+
+export const Depoiment = styled.section`
+    max-width: 1120px;
+    margin: 0 auto;
+    height: 95vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    p {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
     }
 `

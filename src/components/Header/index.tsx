@@ -58,6 +58,13 @@ export function Header({ onOpenNewTransactionModal, label, haveHome, userName = 
                                     Meu perfil e Gráficos
                                 </button>
                             )}
+
+                            { haveHome && (
+                                <button type="button" onClick={() => navigate('/')}>
+                                    Home
+                                </button>  
+                            )}
+
                             <button type="button" onClick={onOpenNewTransactionModal}>
                                 {label}
                             </button>
