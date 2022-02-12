@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../services/api";
 import { useTransactions } from "../hooks/useTransactions";
 import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet";
 
 import { Dashboard } from "../components/Dashboard";
 import { Header } from "../components/Header";
@@ -41,6 +42,9 @@ export function Home(){
     }
     return(
         <>
+            <Helmet>
+                <title>Dashboard | Dtmoney</title>
+            </Helmet>
             <Header label="Nova transação" onOpenNewTransactionModal={handleOpenNewTransactionModal} userName/>
             <Dashboard/>
             <NewTransactionModal

@@ -1,9 +1,10 @@
 // tslint:disable:no-var-requires
-import { Header } from "../components/Header";
-import { useNavigate } from "react-router";
-import { useTransactions } from "../hooks/useTransactions";
 import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import { Helmet } from "react-helmet";
+import { useTransactions } from "../hooks/useTransactions";
 
+import { Header } from "../components/Header";
 import { MonthFilter } from "../components/MonthFilter";
 import { VerticalBar } from "../components/Graphics/VerticalBar";
 import { DonutChart } from "../components/Graphics/DonutChart";
@@ -25,6 +26,9 @@ export function Profile(){
 
     return(
         <>
+            <Helmet>
+                <title>Profile | Dtmoney</title>
+            </Helmet>
             <Header label="Home" onOpenNewTransactionModal={() => navigate('/')} />
             <Container>
                 <main>

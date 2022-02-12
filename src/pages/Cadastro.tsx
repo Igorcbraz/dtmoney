@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react";
 import { useTransactions } from "../hooks/useTransactions";
 import { useNavigate } from "react-router";
 import { toast } from 'react-toastify';
+import { Helmet } from "react-helmet";
 
 import { Header } from "../components/Header";
 
@@ -44,6 +45,10 @@ export function Cadastro(){
 
     return(
         <>
+            <Helmet>
+                <title>Cadastro | Dtmoney</title>
+            </Helmet>
+            
             <Header label="Login" onOpenNewTransactionModal={() => navigate('/Login')} haveHome/>
             <FormLogin onSubmit={handleLogin}>
                 <div>

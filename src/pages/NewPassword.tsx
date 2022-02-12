@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react";
 import { useTransactions } from "../hooks/useTransactions";
 import { useNavigate } from "react-router";
 import { toast } from 'react-toastify';
+import { Helmet } from "react-helmet";
 
 import { Header } from "../components/Header";
 
@@ -39,6 +40,9 @@ export function NewPassword(){
 
     return(
         <>
+            <Helmet>
+                <title>Recuperar Senha | Dtmoney</title>
+            </Helmet>
             <Header label="Login" onOpenNewTransactionModal={() => navigate('/Login')}/>
             <FormLogin onSubmit={handleLogin}>
                 <div>

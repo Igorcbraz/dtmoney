@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 import { scroller, Element} from 'react-scroll'
+import { Helmet } from 'react-helmet'
 
 import logoImg from '../assets/logo.svg'
 import illustration from '../assets/illustration-green.gif'
@@ -25,6 +26,10 @@ export function Landing(){
 
     return(
         <Container>
+            <Helmet>
+                <title>Dtmoney - Controle as suas finanças</title>
+            </Helmet>
+
             <Header id='content'>
                 <div>
                     <img src={logoImg} alt="dt money" title="dt money"/>
