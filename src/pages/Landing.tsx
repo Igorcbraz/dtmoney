@@ -27,7 +27,9 @@ export function Landing(){
     return(
         <Container>
             <Helmet>
-                <title>Dtmoney - Controle as suas finanças</title>
+                <title>Dtmoney - Simplifique o seu controle financeiro</title>
+                <meta name="title" content="Dtmoney - Simplifique o seu controle financeiro"/>
+                <meta name="description" content="A maneira mais rápida, fácil e simples de controlar seus gastos, ver métricas claras sobre seus dados, com o Dtmoney"/>
             </Helmet>
 
             <Header id='content'>
