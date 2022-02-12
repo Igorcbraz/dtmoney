@@ -246,19 +246,113 @@ export const SectionStyles = styled.section`
     }
 `
 
-export const Depoiment = styled.section`
-    max-width: 1120px;
-    margin: 0 auto;
-    height: 95vh;
-
+export const Features = styled.section`
+    background: var(--blue);
+    height: fit-content;
+    padding: 4rem 0;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
 
-    p {
+    
+    .container{
+        max-width: 1120px;
+        margin: 0 auto;
+
         display: flex;
         align-items: center;
-        justify-content: center;
-        
+        justify-content: space-around;
+        flex-wrap: wrap;
+        flex-direction: column;
+
+        .header {
+            h1 {
+                font-size: 2.5rem;
+                font-weight: 600;
+                color: #fff;
+            }
+            p {
+                font-size: 1.2rem;
+                margin: 1rem 0 2rem 0;
+                color: #fff;
+                text-align: center;
+            }
+            h1 span {
+                color: #8bd8a1;
+            }
+
+        }
+    }
+`
+
+export const CardContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+
+    div{
+        background-color: var(--blue-light);
+        width: 45%;
+        padding: 1rem;
+        border-radius: 0.25rem;
+
+        h3{
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #8bd8a1;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 0.9rem;
+            color: #fff;
+            text-align: center;
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+            width: 65%;
+        }
+    }
+`
+
+export const Sentence = styled.section`
+    max-width: 1120px;
+    margin: 0 auto;
+
+    padding: 2rem 0 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    height: 80vh;
+
+    h1 {
+        font-size: 4rem;
+        color: var(--blue);
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    h1 span {
+        color: #8bd8a1;
+    }
+    button {
+        font-size: 1.1rem;
+        color: #FFF;
+        background: var(--blue-light);
+        border: 2px solid transparent;
+        padding: 0 2.3rem;
+        border-radius: 0.25rem;
+        height: 3.2rem;
+
+        transition: 0.2s;
+     
+        &:hover{
+            color: var(--blue-light);
+            background: transparent;
+            border: 2px solid var(--blue-light);
+        }
     }
 `

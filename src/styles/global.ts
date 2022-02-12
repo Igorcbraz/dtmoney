@@ -91,4 +91,29 @@ export const GlobalStyle = createGlobalStyle`
             filter: brightness(0.8);
         }
     }
+
+    /* width */
+    ::-webkit-scrollbar {
+        width: 0.7rem;
+        border-radius: 0.25rem;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: var(--background);
+        border-radius: 0.25rem;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: var(--blue-light);
+        border-radius: 0.25rem;
+        transition: 0.2s;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--blue);
+        transition: 0.2s;
+    }
 `

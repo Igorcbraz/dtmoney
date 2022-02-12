@@ -4,13 +4,15 @@ import { scroller, Element} from 'react-scroll'
 
 import logoImg from '../assets/logo.svg'
 import illustration from '../assets/illustration-green.gif'
-import  chartUp from '../assets/chart-up.svg'
-import  phone from '../assets/phone.svg'
+import chartUp from '../assets/chart-up.svg'
+import phone from '../assets/phone.svg'
 import desktopMockup from '../assets/desktop-mockup.png';
 import cellphoneMockup from '../assets/cellphone-mockup.png';
-import userPhoto from '../assets/user.svg';
+import planningFinance from '../assets/illustration-chart.png';
+import controlFinance from '../assets/illustration-control-finance.png';
+import money from '../assets/illustration-money.png';
 
-import { Container, Header, Introduction, SectionStyles, Depoiment } from '../styles/landing';
+import { Container, Header, Introduction, SectionStyles, Features, CardContainer, Sentence } from '../styles/landing';
 
 
 export function Landing(){
@@ -34,11 +36,9 @@ export function Landing(){
                 </div>
                 
                 <div>
-                    <Link to='dashboard'>
-                        <button type="button" id="login" onClick={() => navigate('/Login')}>
-                            Entrar
-                        </button>  
-                    </Link>
+                    <button type="button" id="login" onClick={() => navigate('/Login')}>
+                        Entrar
+                    </button>  
                     <button type="button" id="cadastrar" onClick={() => navigate('/Cadastro')}>
                         Cadastrar
                     </button> 
@@ -77,7 +77,7 @@ export function Landing(){
                                 Acessar
                             </button>
                             <button className='outline'>
-                            Saiba mais
+                                Saiba mais
                             </button>
                         </div>
                     </div>
@@ -103,10 +103,45 @@ export function Landing(){
                     </div>
                 </SectionStyles>
             </Element>
+            <Element name='features'>
+                <Features>
+                   <div className='container'>
+                       <div className='header'>
+                            <h1>Utilize recursos <span>gratuitos</span></h1>
+                            <p>Entenda como o Dtmoney funciona</p>
+                       </div>
+                       <CardContainer>
+                            <div>
+                                <img src={controlFinance} alt="Control finance illustration"/>
+                                <h3>Planejador de orçamentos</h3>
+                                <p>Diga adeus às planilhas complexas. Adicione e atualize seus orçamentos organizados por categorias</p>
+                            </div>
+                            <div>
+                                <img src={planningFinance} alt="Planning finance illustration"/>
+                                <h3>Monitorador de crédito</h3>
+                                <p>Sem contas complicadas. Tenha acesso 24/7 à suas entradas, saídas e crédito total</p>
+                            </div>
+                            <div>
+                                <img src={money} alt="Counting money illustration"/>
+                                <h3>Acompanhe seus gastos</h3>
+                                <p>Não torne seu dinheiro complexo. Simplifique suas entradas e saídas, saiba para onde seu dinheiro vai e vem</p>
+                            </div>
+                       </CardContainer>
+                   </div>
+                </Features>
+            </Element>
             <Element name='' id='depoiment'>
-                <Depoiment>
-                    
-                </Depoiment>
+                <Sentence>
+                    <h1>
+                        Junte-se a nós <br/> 
+                        faça parte do  <br/>
+                        <span>Dtmoney</span>
+                    </h1>
+
+                    <button onClick={() => navigate('/Cadastro')}>
+                        Inscreva-se
+                    </button>
+                </Sentence>
             </Element>
         </Container>
     )
