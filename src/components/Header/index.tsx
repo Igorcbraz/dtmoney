@@ -3,79 +3,131 @@ import logoImg from '../../assets/logo.svg';
 import { useTransactions } from '../../hooks/useTransactions';
 import { useNavigate } from "react-router";
 import { slide as Menu } from 'react-burger-menu'
+import { Link } from 'react-router-dom';
 
-import { Container, Content, MenuStyles } from './styles';
+import { Container, Content, MenuStyles, LandingHeader } from './styles';
 
 interface HeaderProps{
     onOpenNewTransactionModal?: () => void;
-    label: string;
+    label?: string;
     userName?: boolean;
     haveHome?: boolean;
+    isLanding?: boolean;
 }
 
 
-export function Header({ onOpenNewTransactionModal, label, haveHome, userName = false }: HeaderProps){
+export function Header({ onOpenNewTransactionModal, label, haveHome, userName = false, isLanding = false }: HeaderProps){
     const { user, logout } = useTransactions(); 
     const navigate = useNavigate();
 
     if(window.innerWidth >= 680) {
-        return (
-            <Container>
-                <Content id='content'>
-                    <img src={logoImg} alt="dt money" title="dt money"/>
-                    {userName && (
-                        <div>
-                            <button type="button" onClick={() => navigate('/Profile')} id="btnUser">
-                                {user.customer}
-                            </button>
-                            <button onClick={logout} id="logout">
-                                Sair
-                            </button>
-                        </div>
-                    )}
+        if(isLanding){
+            return(
+                <LandingHeader>
+                    <div>
+                        <img src={logoImg} alt="dt money" title="dt money"/>
+                        <ul>
+                            <li><Link to='/'>Sobre nós</Link></li>
+                            <li><Link to='/'>Funcionalidades</Link></li>
+                            <li><Link to='/'>Documentação</Link></li>
+                        </ul>
+                    </div>
                     
-                    { haveHome && (
-                        <button type="button" onClick={() => navigate('/')}>
-                            Home
+                    <div>
+                        <button type="button" id="login" onClick={() => navigate('/Login')}>
+                            Entrar
                         </button>  
-                    )}
-
-                    <button type="button" onClick={onOpenNewTransactionModal}>
-                        {label}
-                    </button>     
-                </Content>
-            </Container>
-        )
-    } else {
-        return (
-            <Container>
-                <Content id="content">
-                    <MenuStyles id="teste">
-                        <Menu pageWrapId={"page-wrap"} outerContainerId={"teste"}>
-                            <img src={logoImg} alt="dt money" title="dt money" id="dtMoney"/>
-                            {userName && (
-                                <button type="button" onClick={() => navigate('/Profile')}>
-                                    Meu perfil e Gráficos
+                        <button type="button" id="cadastrar" onClick={() => navigate('/Cadastro')}>
+                            Cadastrar
+                        </button> 
+                    </div>
+                </LandingHeader>
+            )
+        } else {
+            return (
+                <Container>
+                    <Content id='content'>
+                        <img src={logoImg} alt="dt money" title="dt money"/>
+                        {userName && (
+                            <div>
+                                <button type="button" onClick={() => navigate('/Profile')} id="btnUser">
+                                    {user.customer}
                                 </button>
-                            )}
+                                <button onClick={logout} id="logout">
+                                    Sair
+                                </button>
+                            </div>
+                        )}
+                        
+                        { haveHome && (
+                            <button type="button" onClick={() => navigate('/')}>
+                                Home
+                            </button>  
+                        )}
 
-                            { haveHome && (
-                                <button type="button" onClick={() => navigate('/')}>
-                                    Home
+                        <button type="button" onClick={onOpenNewTransactionModal}>
+                            {label}
+                        </button>     
+                    </Content>
+                </Container>
+            )
+        }
+    } else {
+        if(isLanding){
+            return(
+                <Container>
+                    <Content id="content" paddingBottom="3rem">
+                        <MenuStyles id="teste">
+                            <Menu pageWrapId={"page-wrap"} outerContainerId={"teste"}>
+                                <img src={logoImg} alt="dt money" title="dt money" id="dtMoney"/>
+
+                                <button className='item'>Sobre nós</button>
+                                <button className='item'>Funcionalidades</button>
+                                <button className='item'>Documentação</button>
+
+                                <button type="button" id="login" onClick={() => navigate('/Login')}>
+                                    Entrar
                                 </button>  
-                            )}
+                                <button type="button" id="cadastrar" onClick={() => navigate('/Cadastro')}>
+                                    Cadastrar
+                                </button> 
+                            </Menu>    
+                        </MenuStyles>
+                        <img src={logoImg} alt="dt money" title="dt money"/>
+                    </Content>
+                </Container>
+            )
+        } else {
+            return (
+                <Container>
+                    <Content id="content">
+                        <MenuStyles id="teste">
+                            <Menu pageWrapId={"page-wrap"} outerContainerId={"teste"}>
+                                <img src={logoImg} alt="dt money" title="dt money" id="dtMoney"/>
+                                {userName && (
+                                    <button type="button" onClick={() => navigate('/Profile')}>
+                                        Meu perfil e Gráficos
+                                    </button>
+                                )}
 
-                            <button type="button" onClick={onOpenNewTransactionModal}>
-                                {label}
-                            </button>
-                            <button onClick={logout} id="logout">
-                                Sair
-                            </button>
-                        </Menu>    
-                    </MenuStyles>
-                    <img src={logoImg} alt="dt money" title="dt money"/>
-                </Content>
-            </Container>
-        )
+                                { haveHome && (
+                                    <button type="button" onClick={() => navigate('/')}>
+                                        Home
+                                    </button>  
+                                )}
+
+                                <button type="button" onClick={onOpenNewTransactionModal}>
+                                    {label}
+                                </button>
+                                <button onClick={logout} id="logout">
+                                    Sair
+                                </button>
+                            </Menu>    
+                        </MenuStyles>
+                        <img src={logoImg} alt="dt money" title="dt money"/>
+                    </Content>
+                </Container>
+            )
+        }
     }
 }

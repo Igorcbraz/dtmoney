@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router'
 import { scroller, Element} from 'react-scroll'
 import { Helmet } from 'react-helmet'
 
-import logoImg from '../assets/logo.svg'
+import { Header } from '../components/Header'
+
 import illustration from '../assets/illustration-green.gif'
 import chartUp from '../assets/chart-up.svg'
 import phone from '../assets/phone.svg'
@@ -13,7 +13,7 @@ import planningFinance from '../assets/illustration-chart.png';
 import controlFinance from '../assets/illustration-control-finance.png';
 import money from '../assets/illustration-money.png';
 
-import { Container, Header, Introduction, SectionStyles, Features, CardContainer, Sentence } from '../styles/landing';
+import { Container, Introduction, SectionStyles, Features, CardContainer, Sentence } from '../styles/landing';
 
 
 export function Landing(){
@@ -32,25 +32,7 @@ export function Landing(){
                 <meta name="description" content="A maneira mais rápida, fácil e simples de controlar seus gastos, ver métricas claras sobre seus dados, com o Dtmoney"/>
             </Helmet>
 
-            <Header id='content'>
-                <div>
-                    <img src={logoImg} alt="dt money" title="dt money"/>
-                    <ul>
-                        <li><Link to='/'>Sobre nós</Link></li>
-                        <li><Link to='/'>Funcionalidades</Link></li>
-                        <li><Link to='/'>Documentação</Link></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <button type="button" id="login" onClick={() => navigate('/Login')}>
-                        Entrar
-                    </button>  
-                    <button type="button" id="cadastrar" onClick={() => navigate('/Cadastro')}>
-                        Cadastrar
-                    </button> 
-                </div>
-            </Header>
+            <Header isLanding/>
             <Introduction>
                 <div className='introduction'>
                     <h1>Simplifique o seu controle <span>financeiro</span></h1>
@@ -66,12 +48,11 @@ export function Landing(){
                         </button>
                     </div>
                 </div>
-                <div className="illustration">
-                    <img src={illustration} alt="Money illustration"/>
-                </div>
+                
+                <img src={illustration} alt="Money illustration"/>
             </Introduction>
             <Element name='dashboard'>
-                <SectionStyles>
+                <SectionStyles witchWrap="wrap">
                     <div>
                         <img src={desktopMockup} alt="Desktop image" />
                     </div>
@@ -91,7 +72,7 @@ export function Landing(){
                 </SectionStyles>
             </Element>
             <Element name='mobile'>
-                <SectionStyles>
+                <SectionStyles witchWrap="wrap-reverse">
                     <div className='container'>
                         <span>02</span>
                         <h1>Mobile.</h1>

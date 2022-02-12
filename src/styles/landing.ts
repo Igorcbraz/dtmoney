@@ -1,110 +1,34 @@
 import styled from 'styled-components';
-import { lighten } from 'polished';
 
 export const Container = styled.div`
     background: var(--blue);
     height: 95vh;
-`;
 
-export const Header = styled.header`
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 2rem 0 1rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-
-    img {
-        height: 3rem;
-    }
-
-    button {
-        font-size: 1rem;
-        color: #FFF;
-        background: var(--blue-light);
-        border: 0;
-        padding: 0 2rem;
-        border-radius: 0.25rem;
-        height: 3rem;
-
-        transition: filter 0.2s;
-     
-        &:hover{
-            filter: brightness(0.9);
-        }
-    }
-
-    ul {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-around;
-        gap: 3rem;
-        height: 3rem;
-        margin-left: 1rem;
-
-        li {
-            list-style-type: none;
-            
-            a {
-                display: inline-block;
-                position: relative;
-                text-decoration: none;
-                color: #fff;
-            }
-            /* effect-underline */
-            a:after {
-                content: '';
-                position: absolute;
-                display: inline-block;
-                left: 0;
-                height: 1em;
-                width: 100%;
-                border-bottom: 1px solid;
-                margin-top: 10px;
-                opacity: 0;
-                -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-                transition: opacity 0.35s, transform 0.35s;
-                -webkit-transform: scale(0,1);
-                transform: scale(0,1);
-            }
-            a:hover:after {
-                opacity: 1;
-                -webkit-transform: scale(1);
-                transform: scale(1);
-            }
-        }
-    }
-
-    div {
-        display: flex;
-        gap: 1.5rem;
-
-        #cadastrar{
-            background: #f3f3f3;
-            color: var(--blue-light);
-        }
-    }
-
-    #btn-light{
-        background-color: ${lighten(0.05, '#6933FF')};
-        border-radius: 0.25rem 0 0 0.25rem;
+    @media screen and (max-width:770px) {
+        height: 130vh;
     }
 `;
 
 export const Introduction = styled.main`
     max-width: 1120px;
+    padding: 0 1rem;
     margin: 0 auto 4.6rem auto;
-    width: 100%;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+    @media screen and (max-width:770px) {
+        flex-wrap: wrap-reverse;
+    }
+
     .introduction{
         color: #fff;
         width: 50%;
+
+        @media screen and (max-width:770px) {
+            width: 100%;
+        }   
 
         h1 {
             font-size: 3.4rem;
@@ -153,25 +77,31 @@ export const Introduction = styled.main`
             }
         }
     }
-    .illustration{
-        width: 40%;
 
-        img{
-            width: 100%;
-        }
+    img{
+        width: 100%;
+        max-width: 450px;
     }
 `
 
-export const SectionStyles = styled.section`
+interface SectionStylesProps {
+    witchWrap: string;
+}
+export const SectionStyles = styled.section<SectionStylesProps>`
     max-width: 1120px;
-    margin: 0 auto;
+    margin: 2rem auto;
     width: 100%;
     height: 95vh;
+    padding: 0 1rem;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 3rem;
+
+    @media screen and (max-width:770px) {
+        flex-wrap: ${props => props.witchWrap};
+    }
 
     .container{
         span{
@@ -249,7 +179,7 @@ export const SectionStyles = styled.section`
 export const Features = styled.section`
     background: var(--blue);
     height: fit-content;
-    padding: 4rem 0;
+    padding: 4rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -270,6 +200,7 @@ export const Features = styled.section`
                 font-size: 2.5rem;
                 font-weight: 600;
                 color: #fff;
+                text-align: center;
             }
             p {
                 font-size: 1.2rem;
@@ -288,6 +219,7 @@ export const Features = styled.section`
 export const CardContainer = styled.div`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 2rem;
 
     div{
@@ -320,7 +252,7 @@ export const Sentence = styled.section`
     max-width: 1120px;
     margin: 0 auto;
 
-    padding: 2rem 0 1rem 0;
+    padding: 2rem 1rem 1rem 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
