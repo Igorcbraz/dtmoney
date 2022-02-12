@@ -29,7 +29,7 @@ export function Header({ onOpenNewTransactionModal, label, haveHome, userName = 
                                 {user.customer}
                             </button>
                             <button onClick={logout} id="logout">
-                            Sair
+                                Sair
                             </button>
                         </div>
                     )}

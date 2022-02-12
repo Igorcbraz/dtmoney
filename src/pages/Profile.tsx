@@ -29,7 +29,7 @@ export function Profile(){
             <Helmet>
                 <title>Profile | Dtmoney</title>
             </Helmet>
-            <Header label="Home" onOpenNewTransactionModal={() => navigate('/')} />
+            <Header label="Home" onOpenNewTransactionModal={() => navigate('/Home')} />
             <Container>
                 <main>
                     <div className="shape">
