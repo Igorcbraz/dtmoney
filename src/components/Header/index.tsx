@@ -24,7 +24,7 @@ export function Header({ onOpenNewTransactionModal, label, haveHome, userName = 
         if(isLanding){
             return(
                 <LandingHeader>
-                    <div>
+                    <div className='headerItem'>
                         <img src={logoImg} alt="dt money" title="dt money"/>
                         <ul>
                             <li><Link to='/'>Sobre nós</Link></li>
