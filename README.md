@@ -1,7 +1,7 @@
 <!-- Logo -->
 <div align="center">
   
-  [![Netlify Status](https://api.netlify.com/api/v1/badges/fcc371d1-eb62-4478-985b-7cb9c3ced352/deploy-status)](https://app.netlify.com/sites/dtmoney-igorcbraz/deploys)
+  [![Netlify Status](https://api.netlify.com/api/v1/badges/fcc371d1-eb62-4478-985b-7cb9c3ced352/deploy-status)](https://app.netlify.com/sites/dtmoneyweb/deploys)
   ![Netlify Status](https://img.shields.io/github/followers/Igorcbraz.svg?style=social&label=Follow&maxAge=2592000)
   
 </div>
