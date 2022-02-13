@@ -39,6 +39,8 @@ As seguintes funcionalidades foram feitas fora do curso _Ignite ReactJs_:
 - [x] Gráficos com os dados das transações
 - [x] Responsividade do website 
 - [x] Paginação das transações 
+- [x] Landing Page Responsivo
+- [x] Utilização básica tags meta para SEO
 
 ## 🔖 Layout
 Você pode acessar o design inicial deesse projeto pelo link abaixo:
