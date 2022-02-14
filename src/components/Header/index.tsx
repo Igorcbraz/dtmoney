@@ -22,7 +22,7 @@ export function Header({ onOpenNewTransactionModal, label, haveHome, userName = 
     const { user, logout } = useTransactions(); 
     const navigate = useNavigate();
 
-    if(width >= 680) {
+    if(width >= 950) {
         if(isLanding){
             // Desktop Landing
             return(

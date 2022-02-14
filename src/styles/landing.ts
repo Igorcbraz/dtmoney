@@ -5,7 +5,7 @@ export const Container = styled.div`
     height: 95vh;
 
     @media screen and (max-width:770px) {
-        height: 130vh;
+        height: 135vh;
     }
 `;
 
