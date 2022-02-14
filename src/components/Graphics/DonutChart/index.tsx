@@ -12,10 +12,6 @@ interface categoryData{
     total: number;
     name: string;
 }
-interface FlexibleRadialChartData{
-    angle: string;
-    color: string;
-}
 interface DonutChartProps {
     whichChart: 'categoriesWithdraw' | 'maxCategory'
 }

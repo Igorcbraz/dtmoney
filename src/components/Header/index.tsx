@@ -2,10 +2,12 @@ import logoImg from '../../assets/logo.svg';
 
 import { useTransactions } from '../../hooks/useTransactions';
 import { useNavigate } from "react-router";
+import { useWindowDimensions } from '../../hooks/useWindowDimensions'
 import { slide as Menu } from 'react-burger-menu'
 import { Link } from 'react-router-dom';
 
 import { Container, Content, MenuStyles, LandingHeader } from './styles';
+
 
 interface HeaderProps{
     onOpenNewTransactionModal?: () => void;
@@ -15,13 +17,14 @@ interface HeaderProps{
     isLanding?: boolean;
 }
 
-
 export function Header({ onOpenNewTransactionModal, label, haveHome, userName = false, isLanding = false }: HeaderProps){
+    const { width } = useWindowDimensions();
     const { user, logout } = useTransactions(); 
     const navigate = useNavigate();
 
-    if(window.innerWidth >= 680) {
+    if(width >= 680) {
         if(isLanding){
+            // Desktop Landing
             return(
                 <LandingHeader>
                     <div className='headerItem'>
@@ -44,6 +47,7 @@ export function Header({ onOpenNewTransactionModal, label, haveHome, userName = 
                 </LandingHeader>
             )
         } else {
+            // Desktop
             return (
                 <Container>
                     <Content id='content'>
@@ -74,6 +78,7 @@ export function Header({ onOpenNewTransactionModal, label, haveHome, userName = 
         }
     } else {
         if(isLanding){
+            // Mobile landing
             return(
                 <Container>
                     <Content id="content" paddingBottom="3rem">
@@ -98,6 +103,7 @@ export function Header({ onOpenNewTransactionModal, label, haveHome, userName = 
                 </Container>
             )
         } else {
+            // Mobile
             return (
                 <Container>
                     <Content id="content">
