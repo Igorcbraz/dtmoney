@@ -1,6 +1,5 @@
 import logoImg from '../../assets/logo.svg';
 
-import { useWindowDimensions } from '../../hooks/useWindowDimensions'
 import { slide as Menu } from 'react-burger-menu'
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router";
@@ -10,10 +9,9 @@ import { Container, Content, MenuStyles } from '../Header/styles';
 
 
 export function HeaderLanding(){
-    const { width } = useWindowDimensions();
     const navigate = useNavigate();
 
-    if(width >= 950) {
+    if(window.innerWidth >= 950) {
         // Desktop Landing
         return (
             <LandingHeader>

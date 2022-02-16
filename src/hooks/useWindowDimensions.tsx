@@ -14,10 +14,7 @@ function getWindowDimensions() {
 }
 
 export function useWindowDimensions() {
-  const [windowDimensions, setWindowDimensions] = useState<windowDimensions>({
-    width: 1024,
-    height: 480
-  });
+  const [windowDimensions, setWindowDimensions] = useState<windowDimensions>(getWindowDimensions());
 
   useEffect(() => {
     function handleResize() {
