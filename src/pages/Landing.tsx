@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router'
 import { scroller, Element} from 'react-scroll'
 import { Helmet } from 'react-helmet'
 
-import { Header } from '../components/Header'
+import { HeaderLanding } from '../components/HeaderLanding'
 
 import illustration from '../assets/illustration-green.gif'
 import chartUp from '../assets/chart-up.svg'
@@ -32,7 +32,7 @@ export function Landing(){
                 <meta name="description" content="A maneira mais rápida, fácil e simples de controlar seus gastos, ver métricas claras sobre seus dados, com o Dtmoney"/>
             </Helmet>
 
-            <Header isLanding/>
+            <HeaderLanding/>
             <Introduction>
                 <div className='introduction'>
                     <h1>Simplifique o seu controle <span>financeiro</span></h1>

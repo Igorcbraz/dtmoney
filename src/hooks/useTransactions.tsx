@@ -94,13 +94,13 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
         }
 
         setTransactions([
-            ...transactions,
-            transaction
+            transaction,
+            ...transactions
         ])
 
         localStorage.setItem('Transactions', JSON.stringify([
-            ...transactions,
-            transaction
+            transaction,
+            ...transactions
         ]))
     }
 

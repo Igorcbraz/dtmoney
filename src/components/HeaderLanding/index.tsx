@@ -1,53 +1,40 @@
 import logoImg from '../../assets/logo.svg';
 
-import { useTransactions } from '../../hooks/useTransactions';
-import { useNavigate } from "react-router";
 import { useWindowDimensions } from '../../hooks/useWindowDimensions'
 import { slide as Menu } from 'react-burger-menu'
+import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router";
 
-import { Container, Content, MenuStyles } from './styles';
+import { LandingHeader } from './style';
+import { Container, Content, MenuStyles } from '../Header/styles';
 
 
-interface HeaderProps{
-    onOpenNewTransactionModal?: () => void;
-    label?: string;
-    userName?: boolean;
-    haveHome?: boolean;
-}
-
-export function Header({ onOpenNewTransactionModal, label, haveHome, userName = false }: HeaderProps){
+export function HeaderLanding(){
     const { width } = useWindowDimensions();
-    const { user, logout } = useTransactions(); 
     const navigate = useNavigate();
 
     if(width >= 950) {
-        // Desktop
+        // Desktop Landing
         return (
-            <Container>
-                <Content id='content'>
+            <LandingHeader>
+                <div className='headerItem'>
                     <img src={logoImg} alt="dt money" title="dt money"/>
-                    {userName && (
-                        <div>
-                            <button type="button" onClick={() => navigate('/Profile')} id="btnUser">
-                                {user.customer}
-                            </button>
-                            <button onClick={logout} id="logout">
-                                Sair
-                            </button>
-                        </div>
-                    )}
-                    
-                    { haveHome && (
-                        <button type="button" onClick={() => navigate('/')}>
-                            Home
-                        </button>  
-                    )}
-
-                    <button type="button" onClick={onOpenNewTransactionModal}>
-                        {label}
-                    </button>     
-                </Content>
-            </Container>
+                    <ul>
+                        <li><Link to='/'>Sobre nós</Link></li>
+                        <li><Link to='/'>Funcionalidades</Link></li>
+                        <li><Link to='/'>Documentação</Link></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <button type="button" id="login" onClick={() => navigate('/Login')}>
+                        Entrar
+                    </button>  
+                    <button type="button" id="cadastrar" onClick={() => navigate('/Cadastro')}>
+                        Cadastrar
+                    </button> 
+                </div>
+            </LandingHeader>
         )
     } else {
         // Mobile landing
