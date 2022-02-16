@@ -6,6 +6,34 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     margin: 0.5rem 0;
+
+    #csv{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 1rem;
+        color: var(--text-body);
+        background: var(--shape);
+        border: 2px solid ${darken(0.15, '#FFF')};
+        padding: 0;
+        border-radius: 0.25rem;
+        height: 3rem;
+        width: 15%;
+        text-decoration: none;
+
+        transition: 0.2s;
+
+        &:hover {
+            color: var(--green);
+            border-color: var(--green);
+        }   
+
+        img {
+            width: 15%;
+            margin-right: 1rem;
+        }
+    }
 `
 
 export const PaginationStyle = styled.div`

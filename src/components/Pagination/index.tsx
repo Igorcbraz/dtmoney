@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useTransactions } from '../../hooks/useTransactions';
 import { calculateRange } from '../../utils/FormatPaginationTransactions';
+import { CSVLink } from "react-csv";
+
+import ExcelLogo from '../../assets/excel-logo.svg';
 
 import { Container, PaginationStyle, RangePagination } from './style';
-
 
 export function Pagination(){
     const { transactions, setCurrentPage, currentPage, rangePagination, setRangePagination } = useTransactions();
@@ -26,6 +28,30 @@ export function Pagination(){
         }
     }
 
+    // CSV config
+    const csvTransactions = transactions.map((transaction) => {
+      return {
+        title: transaction.title,
+        amount: `${transaction.tipo === 'withdraw' ? '-' : '' } ${
+            new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(Number(transaction.amount))
+        }`,
+        category: transaction.category,
+        payer: transaction.payer,
+        createdAt: `${new Intl.DateTimeFormat('pt-BR').format(new Date(transaction.createdAt))}`
+      }
+    });
+
+    const headers = [
+        { label: "Título", key: "title" },
+        { label: "Valor", key: "amount" },
+        { label: "Categoria", key: "category" },
+        { label: "Pagador(a)", key: "payer" },
+        { label: "Data", key: "createdAt" }
+    ];
+
     return(
         <Container>
             <RangePagination>
@@ -36,6 +62,12 @@ export function Pagination(){
                     value={rangePagination}
                 />
             </RangePagination>
+
+            <CSVLink data={csvTransactions} headers={headers} id="csv">
+                <img src={ExcelLogo} alt="Excel logo" />
+                Baixar .CSV
+            </CSVLink>
+
             <PaginationStyle>
                 <button 
                     className={`arrows ${paginationRange.length < 5 && `buttonDisabled`}`}

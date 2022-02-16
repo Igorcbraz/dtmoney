@@ -60,7 +60,6 @@ export function TransactionsTable(){
     }
     
     if(transactions.length === 0) return <Loading width={400} height={400}/>;
-
     return(
         <Container>
             <MonthFilter/>
@@ -82,6 +81,7 @@ export function TransactionsTable(){
                         <tr key={transaction.id}>
                             <td>{transaction.title}</td>
                             <td className={transaction.tipo}>
+                                { transaction.tipo === 'withdraw' && '-' }
                                 {new Intl.NumberFormat('pt-BR', {
                                     style: 'currency',
                                     currency: 'BRL'
