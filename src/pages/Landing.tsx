@@ -35,7 +35,8 @@ export function Landing(){
                 <meta name="description" content="A maneira mais rápida, fácil e simples de controlar seus gastos, ver métricas claras sobre seus dados, com o Dtmoney"/>
             </Helmet>
 
-            {width >= 950 ? <HeaderDesktop/> : <HeaderMobile/>}
+            <HeaderMobile/>
+            <HeaderDesktop/>
             <Introduction>
                 <div className='introduction'>
                     <h1>Simplifique o seu controle <span>financeiro</span></h1>
