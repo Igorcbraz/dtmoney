@@ -26,6 +26,11 @@ export function Landing(){
         delay: 0,
         smooth: true,
     }
+    
+    function CreateHeader(){
+        if(width >= 950) return <HeaderDesktop/>
+        else return <HeaderMobile/>
+    }
 
     return(
         <Container>
@@ -35,8 +40,7 @@ export function Landing(){
                 <meta name="description" content="A maneira mais rápida, fácil e simples de controlar seus gastos, ver métricas claras sobre seus dados, com o Dtmoney"/>
             </Helmet>
 
-            <HeaderMobile/>
-            <HeaderDesktop/>
+            {CreateHeader()}
             <Introduction>
                 <div className='introduction'>
                     <h1>Simplifique o seu controle <span>financeiro</span></h1>
