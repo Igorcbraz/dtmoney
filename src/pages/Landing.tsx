@@ -20,6 +20,8 @@ import { Container, Introduction, SectionStyles, Features, CardContainer, Senten
 
 export function Landing(){
     const { width } = useWindowDimensions();
+    const isMobile = width <= 950;
+    
     const navigate = useNavigate();
     let optionsScroll = {
         duration: 150,
@@ -40,7 +42,7 @@ export function Landing(){
                 <meta name="description" content="A maneira mais rápida, fácil e simples de controlar seus gastos, ver métricas claras sobre seus dados, com o Dtmoney"/>
             </Helmet>
 
-            {CreateHeader()}
+            {isMobile ? <HeaderMobile/> : <HeaderDesktop/>}
             <Introduction>
                 <div className='introduction'>
                     <h1>Simplifique o seu controle <span>financeiro</span></h1>
