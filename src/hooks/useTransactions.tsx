@@ -125,7 +125,8 @@ export function TransactionsProvider({ children }: TransactionsProviderProps){
             category: transaction.category,
             payer: transaction.payer,
             id: transaction.id,
-            FK_id_user: transaction.FK_id_user
+            FK_id_user: transaction.FK_id_user,
+            createdAt: transaction.createdAt
         });
 
         if(data === 0 || data.status){

@@ -47,6 +47,40 @@ export const Container = styled.form`
             filter: brightness(0.9);
         }
     }
+
+    .react-date-picker{
+        width: 100%;
+        margin-top: 0.5rem;
+        border-radius: 0.25rem;
+        background: #e7e9ee;
+
+        .react-date-picker__wrapper{
+            padding: 0.3rem 1rem;
+
+            border: 1px solid #d7d7d7;
+
+            .react-date-picker__inputGroup{
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 0.5rem;
+
+                .react-date-picker__inputGroup__input{
+                    background-color: var(--blue-light);
+                    color: #fff;
+                    border: 0;
+                    margin: 0;
+                }
+                span {
+                    color: var(--blue-light);
+                }
+            }
+
+            button svg {
+                stroke: var(--blue-light);
+            }
+        }
+    }
 `;
 
 export const TransactionTypeContainer = styled.div`

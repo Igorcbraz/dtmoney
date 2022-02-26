@@ -2,12 +2,14 @@ import { FormEvent, useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useTransactions } from '../../hooks/useTransactions';
 import { toast } from 'react-toastify';
+import DatePicker from 'react-date-picker';
 
 import closeImg from '../../assets/close.svg';
 import incomeImg from '../../assets/income.svg';
 import outcomeImg from '../../assets/outcome.svg';
 
 import { Container, RadioBox, TransactionTypeContainer } from '../NewTransactionModal/style';
+
 
 interface Transactions {
     FK_id_user?: number;
@@ -34,13 +36,15 @@ export function EditTransactionModal({ isOpen, onRequestClose, transaction}: Edi
     const [category, setCategory] = useState('');
     const [tipo, setTipo] = useState('');
     const [payer, setPayer] = useState('');
-    
+    const [date, setDate] = useState(new Date());
+
     useEffect(() => {
         setTitle(transaction.title);
         setAmount(transaction.amount)
         setCategory(transaction.category)
         setTipo(transaction.tipo);
         setPayer(transaction.payer);
+        setDate(new Date(transaction.createdAt))
     }, [transaction])
 
     async function handleEditTransaction(event: FormEvent){
@@ -52,7 +56,7 @@ export function EditTransactionModal({ isOpen, onRequestClose, transaction}: Edi
             toast.error('Todos os campos devem estar preenchidos')
             return;
         }
-
+        
         const response = await updateTransaction({
             title,
             amount,
@@ -61,7 +65,7 @@ export function EditTransactionModal({ isOpen, onRequestClose, transaction}: Edi
             payer,
             id: transaction.id,
             FK_id_user: transaction.FK_id_user,
-            createdAt: transaction.createdAt
+            createdAt: `${new Date(date)}`
         })
 
         if(response === 1){
@@ -133,6 +137,7 @@ export function EditTransactionModal({ isOpen, onRequestClose, transaction}: Edi
                     value={payer}
                     onChange={event => setPayer(event.target.value)} 
                 />
+                <DatePicker onChange={setDate} value={date} />
 
 
                 <button type="submit">
