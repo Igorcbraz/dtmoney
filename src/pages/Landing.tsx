@@ -1,10 +1,8 @@
 import { useNavigate } from 'react-router'
-import { useWindowDimensions } from '../hooks/useWindowDimensions'
 import { scroller, Element} from 'react-scroll'
 import { Helmet } from 'react-helmet'
 
-import { HeaderDesktop } from '../components/HeaderLanding/Desktop/index'
-import { HeaderMobile } from '../components/HeaderLanding/Mobile/index'
+import { RenderHeader } from '../components/HeaderLanding/RenderHeader/index';
 
 import illustration from '../assets/illustration-green.gif'
 import chartUp from '../assets/chart-up.svg'
@@ -19,14 +17,13 @@ import { Container, Introduction, SectionStyles, Features, CardContainer, Senten
 
 
 export function Landing(){
-    const { width } = useWindowDimensions();
     const navigate = useNavigate();
     let optionsScroll = {
         duration: 150,
         delay: 0,
         smooth: true,
     }
-
+    
     return(
         <Container>
             <Helmet>
@@ -35,7 +32,7 @@ export function Landing(){
                 <meta name="description" content="A maneira mais rápida, fácil e simples de controlar seus gastos, ver métricas claras sobre seus dados, com o Dtmoney"/>
             </Helmet>
 
-            {width >= 950 ? <HeaderDesktop/> : <HeaderMobile/>}
+            <RenderHeader/>
             <Introduction>
                 <div className='introduction'>
                     <h1>Simplifique o seu controle <span>financeiro</span></h1>
