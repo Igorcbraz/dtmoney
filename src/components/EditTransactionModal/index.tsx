@@ -65,7 +65,7 @@ export function EditTransactionModal({ isOpen, onRequestClose, transaction}: Edi
             payer,
             id: transaction.id,
             FK_id_user: transaction.FK_id_user,
-            createdAt: `${new Date(date)}`
+            createdAt: `${new Date(date).toISOString()}`
         })
 
         if(response === 1){

@@ -51,6 +51,7 @@ export function DonutChart({whichChart}: DonutChartProps){
             }
         });
     });  
+    
     const categoriesArr = Object.keys(categoriesObj).map(key => { // convert object containing Objects into array of objects
         return {
             deposits: categoriesObj[key].deposits,
@@ -59,7 +60,9 @@ export function DonutChart({whichChart}: DonutChartProps){
             name: key
         };
     })
-    
+
+    const ascendingOrder = categoriesArr.sort((a, b) => parseFloat(b.withdraws) - parseFloat(a.withdraws));
+
     const colors = [
         '#5429CC',
         '#4421a3',
@@ -69,7 +72,7 @@ export function DonutChart({whichChart}: DonutChartProps){
         '#c4b7ec',
         '#291561',
     ]
-    const data = categoriesArr.map((category: categoryData, index: number) => {
+    const data = ascendingOrder.slice(0, 5).map((category: categoryData, index: number) => {
         return {
             angle: category.withdraws,
             color: colors[index]
@@ -81,7 +84,7 @@ export function DonutChart({whichChart}: DonutChartProps){
             return(
                 <Container>
                     <div>
-                        <h2>Despesas por categoria</h2>
+                        <h2>5 Maiores Despesas</h2>
                         <FlexibleRadialChart
                             colorType="literal"
                             innerRadius={90}
@@ -93,7 +96,7 @@ export function DonutChart({whichChart}: DonutChartProps){
                     </div>
         
                     <div className="categories">
-                        {categoriesArr.map((category: categoryData, index: number) => {
+                        {ascendingOrder.slice(0, 5).map((category: categoryData, index: number) => {
                             if(category.withdraws !== 0){
                                 return (
                                     <div id="category">

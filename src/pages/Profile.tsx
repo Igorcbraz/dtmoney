@@ -37,7 +37,7 @@ export function Profile(){
                         <h2>{user.customer}</h2>
                     </div>
                     <div className="shape" id='category'>
-                        <DonutChart whichChart="categoriesWithdraw"/>
+                        <DonutChart whichChart="categoriesWithdraw"/> 
                     </div>
                 </main>
                 <div className="shape" id="depositsWithdraws">
