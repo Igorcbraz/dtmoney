@@ -84,7 +84,7 @@ export function DonutChart({whichChart}: DonutChartProps){
             return(
                 <Container>
                     <div>
-                        <h2>5 Maiores Despesas</h2>
+                        <h2>5 Maiores Despesas por Categoria</h2>
                         <FlexibleRadialChart
                             colorType="literal"
                             innerRadius={90}
