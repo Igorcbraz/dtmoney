@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTransactions } from '../../hooks/useTransactions';
 import { calculateRange } from '../../utils/FormatPaginationTransactions';
 import { CSVLink } from "react-csv";
+import { useWindowDimensions } from '../../hooks/useWindowDimensions';
 
 import ExcelLogo from '../../assets/excel-logo.svg';
 
@@ -9,6 +10,7 @@ import { Container, PaginationStyle, RangePagination } from './style';
 
 export function Pagination(){
     const { transactions, setCurrentPage, currentPage, rangePagination, setRangePagination } = useTransactions();
+    const { width } = useWindowDimensions();
     const [paginationRange, setPaginationRange] = useState<number[]>([])
     const [contPagination, setContPagination] = useState(0)
 
@@ -63,10 +65,12 @@ export function Pagination(){
                 />
             </RangePagination>
 
-            <CSVLink data={csvTransactions} headers={headers} id="csv">
-                <img src={ExcelLogo} alt="Excel logo" />
-                Baixar .CSV
-            </CSVLink>
+            {width >= 950 && (
+                <CSVLink data={csvTransactions} headers={headers} id="csv">
+                    <img src={ExcelLogo} alt="Excel logo" />
+                    Baixar .CSV
+                </CSVLink>
+            )}
 
             <PaginationStyle>
                 <button 

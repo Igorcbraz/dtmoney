@@ -10,6 +10,10 @@ export const Container = styled.div`
     flex-direction: column;
     margin-top: -8rem;
 
+    @media (max-width: 950px) {
+        margin-top: 3rem;
+    }
+
     #error{
         width: 100%;
         height: 400px;
@@ -32,7 +36,9 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         justify-content: space-around;
+        flex-wrap: wrap;
         flex-direction: row;
+        gap: 2rem;
 
         margin-bottom: 4rem;
     }
@@ -74,8 +80,11 @@ export const Container = styled.div`
     }
 
     #category{
-        position: relative;
         width: 60%;
+
+        @media (max-width: 950px) {
+            width: 100%;
+        }
     }
 
     & .shape{

@@ -5,7 +5,13 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0.5rem 0;
+    flex-wrap: wrap-reverse;
+    gap: 1rem;
+    margin: 1.5rem 0;
+
+    @media (max-width: 950px) {
+        justify-content: center;
+    }
 
     #csv{
         display: flex;
@@ -76,6 +82,11 @@ export const PaginationStyle = styled.div`
 `
 
 export const RangePagination = styled.div`
+    @media (max-width: 950px) {
+        display: flex;
+        justify-content: center;
+    }
+
     label{
         color: var(--text-title);
         margin-right: 1rem;

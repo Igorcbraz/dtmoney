@@ -50,24 +50,33 @@ export function Header({ onOpenNewTransactionModal, label, haveHome, userName = 
             </Container>
         )
     } else {
-        // Mobile landing
+        // Mobile
         return(
             <Container>
                 <Content id="content" paddingBottom="3rem">
                     <MenuStyles id="teste">
                         <Menu pageWrapId={"page-wrap"} outerContainerId={"teste"}>
-                            <img src={logoImg} alt="dt money" title="dt money" id="dtMoney"/>
+                        <img src={logoImg} alt="dt money" title="dt money"/>
 
-                            <button className='item'>Sobre nós</button>
-                            <button className='item'>Funcionalidades</button>
-                            <button className='item'>Documentação</button>
-
-                            <button type="button" id="login" onClick={() => navigate('/Login')}>
-                                Entrar
+                        <div>
+                            <button type="button" onClick={() => navigate('/Profile')} id="btnUser">
+                                {user.customer}
+                            </button>
+                            <button onClick={logout} id="logout">
+                                Sair
+                            </button>
+                        </div>
+                        
+                        
+                        { haveHome && (
+                            <button type="button" onClick={() => navigate('/')}>
+                                Home
                             </button>  
-                            <button type="button" id="cadastrar" onClick={() => navigate('/Cadastro')}>
-                                Cadastrar
-                            </button> 
+                        )}
+
+                        <button type="button" onClick={onOpenNewTransactionModal}>
+                            {label}
+                        </button> 
                         </Menu>    
                     </MenuStyles>
                     <img src={logoImg} alt="dt money" title="dt money"/>

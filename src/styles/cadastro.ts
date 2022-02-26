@@ -6,6 +6,11 @@ export const FormLogin = styled.form`
     justify-content: center;
     margin-top: -10rem;
 
+    @media (max-width: 950px) {
+        margin-top: 3rem;
+    }
+
+
     div:first-child{
         display: flex;
         flex-direction: column;

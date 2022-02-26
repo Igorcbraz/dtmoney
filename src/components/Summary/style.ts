@@ -5,6 +5,10 @@ export const Container = styled.div`
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 2rem;
     margin-top: -10rem;
+
+    @media (max-width: 950px) {
+        margin-top: 0;
+    }
 `;
 
 interface CardProps {
