@@ -6,9 +6,9 @@ import { useWindowDimensions } from '../../../hooks/useWindowDimensions'
 export function RenderHeader(){
   const { width } = useWindowDimensions();
  
-  if(width >= 950){
-    return <HeaderDesktop/>
-  } else {
+  if(width <= 950){
     return <HeaderMobile/>
+  } else {
+    return <HeaderDesktop/>
   }
 }
