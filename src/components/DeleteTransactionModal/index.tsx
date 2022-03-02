@@ -12,12 +12,21 @@ import { Container } from './style';
 interface DeleteTransactionModalProps{
     isOpen: boolean;
     onRequestClose: () => void;
-    transactionId: number;
+    transactionId: number | any;
     userId?: number;
+    setHasTransactions: (hasTransactions: boolean) => void;
+    hasTransactions: boolean;
 }
 
-export function DeleteTransactionModal({ isOpen, onRequestClose, transactionId, userId}: DeleteTransactionModalProps){
-    const { deleteTransaction } = useTransactions();
+export function DeleteTransactionModal({ 
+    isOpen,
+    onRequestClose,
+    transactionId,
+    userId,
+    hasTransactions,
+    setHasTransactions
+}: DeleteTransactionModalProps){
+    const { deleteTransaction, transactions } = useTransactions();
     
     async function handleDeleteTransaction(event: FormEvent){
         event.preventDefault();
@@ -25,6 +34,10 @@ export function DeleteTransactionModal({ isOpen, onRequestClose, transactionId, 
         const response = await deleteTransaction(transactionId, userId)
 
         if(response === 1){
+            if(hasTransactions && transactions.length === 1){
+                setHasTransactions(false);
+            }
+
             onRequestClose();
             toast.success('Transação excluída com sucesso');
         }

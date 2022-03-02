@@ -6,11 +6,12 @@ import { ToastContainer } from 'react-toastify';
 import { Home } from './pages/Home'
 import { Login } from './pages/Login';
 import { Cadastro } from './pages/Cadastro';
+import { Docs } from './pages/Docs';
+import { Profile } from './pages/Profile';
+import { Landing } from './pages/Landing';
+import { NewPassword } from './pages/NewPassword';
 
 import { GlobalStyle } from "./styles/global";
-import { Profile } from './pages/Profile';
-import { NewPassword } from './pages/NewPassword';
-import { Landing } from './pages/Landing';
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -27,6 +28,7 @@ export function App() {
           <Route path="/Cadastro" element={<Cadastro />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/newPassword" element={<NewPassword />} />
+          <Route path="/Docs" element={<Docs />} />
         </Routes>
       </TransactionsProvider>
 

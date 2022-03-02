@@ -4,12 +4,16 @@ import { Pagination } from "../Pagination";
 
 import { Container } from "./styles";
 
-export function Dashboard(){
+interface DashboardProps{
+    hasTransactions: boolean;
+    setHasTransactions: (hasTransactions: boolean) => void;
+}
+export function Dashboard({ hasTransactions, setHasTransactions }: DashboardProps){
     return(
         <Container>
             <Summary/>
-            <TransactionsTable/>
-            <Pagination/>
+            <TransactionsTable hasTransactions={hasTransactions} setHasTransactions={setHasTransactions}/>
+            <Pagination hasTransactions={hasTransactions}/>
         </Container>
     );
 }

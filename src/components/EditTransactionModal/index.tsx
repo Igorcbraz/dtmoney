@@ -12,8 +12,8 @@ import { Container, RadioBox, TransactionTypeContainer } from '../NewTransaction
 
 
 interface Transactions {
-    FK_id_user?: number;
-    id: number;
+    FK_id_user: number | any;
+    id?: number;
     title: string;
     amount: number;
     tipo: string;

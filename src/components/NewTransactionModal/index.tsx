@@ -13,8 +13,10 @@ import { Container, RadioBox, TransactionTypeContainer } from './style';
 interface NewTransactionModalProps{
     isOpen: boolean;
     onRequestClose: () => void;
+    setHasTransactions: (hasTransactions: boolean) => void;
+    hasTransactions: boolean;
 }
-export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionModalProps){
+export function NewTransactionModal({ isOpen, onRequestClose, setHasTransactions, hasTransactions }: NewTransactionModalProps){
     const { createTransaction, user } = useTransactions();
 
     const [title, setTitle] = useState('');
@@ -25,7 +27,7 @@ export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionMod
 
     async function handleCreateNewTransaction(event: FormEvent){
         event.preventDefault();
-
+        
         if(title.trim()    === '' || amount       === 0  ||
            category.trim() === '' || tipo.trim()  === '' ||
            tipo.trim()     === '' || payer.trim() === '') {
@@ -33,21 +35,26 @@ export function NewTransactionModal({ isOpen, onRequestClose}: NewTransactionMod
             return;
         }
 
+        const { id } = user;
         await createTransaction({
             title,
             amount,
             category,
             tipo,
             payer,
-            id: user.id
-        })
+            FK_id_user: id
+        });
 
         setTitle('');
         setAmount(0);
         setCategory('');
         setTipo('deposit');
         onRequestClose();
-        setPayer('')
+        setPayer('');
+
+        if(!hasTransactions){
+            setHasTransactions(true);
+        }
     }
 
     return(

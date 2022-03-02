@@ -8,7 +8,11 @@ import ExcelLogo from '../../assets/excel-logo.svg';
 
 import { Container, PaginationStyle, RangePagination } from './style';
 
-export function Pagination(){
+interface PaginationProps{
+    hasTransactions: boolean;
+}
+
+export function Pagination({ hasTransactions }: PaginationProps){
     const { transactions, setCurrentPage, currentPage, rangePagination, setRangePagination } = useTransactions();
     const { width } = useWindowDimensions();
     const [paginationRange, setPaginationRange] = useState<number[]>([])
@@ -54,6 +58,7 @@ export function Pagination(){
         { label: "Data", key: "createdAt" }
     ];
 
+    if(hasTransactions === false) return <></>;
     return(
         <Container>
             <RangePagination>

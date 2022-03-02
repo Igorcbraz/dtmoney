@@ -10,8 +10,7 @@ export const FormLogin = styled.form`
         margin-top: 3rem;
     }
 
-
-    div:first-child{
+    .formDiv{
         display: flex;
         flex-direction: column;
 
@@ -21,7 +20,7 @@ export const FormLogin = styled.form`
         border-radius: 0.25rem;
         color: var(--text-title);
 
-        div {
+        .containerInput {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 1rem;

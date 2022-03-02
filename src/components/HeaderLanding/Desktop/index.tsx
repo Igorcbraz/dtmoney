@@ -15,8 +15,8 @@ export function HeaderDesktop(){
                 <img src={logoImg} alt="dt money" title="dt money"/>
                 <ul>
                     <li><Link to='/'>Sobre nós</Link></li>
-                    <li><Link to='/'>Funcionalidades</Link></li>
-                    <li><Link to='/'>Documentação</Link></li>
+                    <li><Link to='/'>Ajuda</Link></li>
+                    <li><Link to='/Docs'>Documentação</Link></li>
                 </ul>
             </div>
             

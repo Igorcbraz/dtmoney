@@ -5,9 +5,9 @@ import { toast } from 'react-toastify';
 import { Helmet } from "react-helmet";
 
 import { Header } from "../components/Header";
+import { Loading } from "../components/Loading";
 
 import { FormLogin } from '../styles/cadastro'
-import { Loading } from "../components/Loading";
 
 export function Cadastro(){
     const { registerUser } = useTransactions();
@@ -51,10 +51,10 @@ export function Cadastro(){
             
             <Header label="Login" onOpenNewTransactionModal={() => navigate('/Login')} haveHome/>
             <FormLogin onSubmit={handleLogin}>
-                <div>
+                <div className="formDiv">
                     <h1>Para controlar seus gastos <span>Realize o Cadastro</span></h1>
 
-                    <div>
+                    <div className="containerInput">
                         <span>
                             <label>Nome Completo</label>
                             <input
@@ -74,7 +74,7 @@ export function Cadastro(){
                         </span>
                     </div>
                     
-                    <div>
+                    <div className="containerInput">
                         <span>
                             <label>Senha</label>
                             <input

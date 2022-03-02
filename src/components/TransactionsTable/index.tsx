@@ -12,8 +12,8 @@ import { MonthFilter } from "../MonthFilter";
 import { Loading } from "../Loading";
 
 interface Transactions {
-    FK_id_user?: number;
-    id: number;
+    FK_id_user: number | any;
+    id?: number;
     title: string;
     amount: number;
     tipo: string;
@@ -21,8 +21,12 @@ interface Transactions {
     payer: string;
     createdAt: string;
 }
+interface TransactionsTableProps{
+    hasTransactions: boolean;
+    setHasTransactions: (hasTransactions: boolean) => void;
+}
 
-export function TransactionsTable(){
+export function TransactionsTable({ hasTransactions, setHasTransactions }: TransactionsTableProps){
     const { transactions, filterTransactions, currentPage, rangePagination } = useTransactions();
     const [rightTransactions, setRightTransactions] = useState<Transactions[]>(transactions)
 
@@ -58,8 +62,9 @@ export function TransactionsTable(){
     function handleCloseDeleteTransactionModal(){
         setIsDeleteTransactionModalOpen(false);
     }
-    
-    if(transactions.length === 0) return <Loading width={400} height={400}/>;
+
+    if(transactions.length === 0 && hasTransactions === true) return <Loading width={400} height={400}/>;
+    if(hasTransactions === false) return <p id="firstLogin">Faça o seu primeiro cadastro</p>
     return(
         <Container>
             <MonthFilter/>
@@ -118,6 +123,8 @@ export function TransactionsTable(){
                 onRequestClose={handleCloseDeleteTransactionModal}
                 transactionId={actionTransactionModal.id}
                 userId={actionTransactionModal.FK_id_user}
+                setHasTransactions={setHasTransactions}
+                hasTransactions={hasTransactions}
             />
         </Container>
     );

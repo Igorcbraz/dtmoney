@@ -3,8 +3,8 @@ import { api } from "../services/api";
 import jwt_decode from "jwt-decode";
 
 interface Transactions {
-    FK_id_user?: number;
-    id: number | any;
+    FK_id_user: number | any;
+    id?: number | any;
     title: string;
     amount: number;
     tipo: string;

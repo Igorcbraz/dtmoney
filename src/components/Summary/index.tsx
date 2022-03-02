@@ -9,7 +9,8 @@ import totalImg from '../../assets/total.svg';
 import { Container, Card } from "./style";
 
 interface Transactions {
-    id: number;
+    FK_id_user: number | any;
+    id?: number;
     title: string;
     amount: number;
     tipo: string;

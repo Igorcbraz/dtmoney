@@ -14,7 +14,8 @@ import { useEffect, useState } from 'react';
 
 
 interface Transactions {
-    id: number;
+    FK_id_user: number | any;
+    id?: number;
     title: string;
     amount: number;
     tipo: string;
