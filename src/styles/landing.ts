@@ -253,14 +253,14 @@ export const Sentence = styled.section`
     max-width: 1120px;
     margin: 0 auto;
 
-    padding: 2rem 1rem 1rem 1rem;
+    padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     flex-wrap: wrap;
 
-    height: 80vh;
+    height: 90vh;
 
     h1 {
         font-size: 4rem;
@@ -287,5 +287,106 @@ export const Sentence = styled.section`
             background: transparent;
             border: 2px solid var(--blue-light);
         }
+    }
+`
+
+export const SocialMedias = styled.section`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    
+    background-color: var(--blue-light);
+    color: #FFF;
+
+    ul {
+        display: flex;
+        gap: 2.5rem;
+
+        li {
+            list-style-type: none;
+
+            a {
+                transition: 0.2s;
+
+                &:hover {
+                    background-color: var(--blue);
+                    padding: 0.5rem 0.5rem 0 0;
+                    border-radius: 1rem 4.2rem 3.1rem 2rem;
+                }
+            }
+        }
+    }
+`
+
+export const Footer = styled.footer`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2.5rem;
+    width: 100%;
+
+    color: #FFF;
+    background-color: var(--blue);
+
+    div {
+        h3 {
+            display: inline-block;
+            position: relative;
+
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+
+            color: #FFF;
+
+            /* effect-underline */
+            &::after {
+                content: '';
+                position: absolute;
+                display: inline-block;
+                left: 0;
+                height: 1em;
+                width: 60%;
+                border-bottom: 3px solid;
+                margin-top: 1rem;
+                color: var(--green);
+            }
+        }
+
+        p {
+            text-align: justify;
+            font-size: 1rem;
+            width: 85%;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            font-size: 1rem;
+
+            li {
+                list-style-type: none;
+                
+                a{
+                    color: #FFF;
+                }
+            }
+        }
+    }
+`
+
+export const Final = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--blue);
+    width: 100%;
+    padding-bottom: 1rem;
+
+    a {
+        color: #FFF;
     }
 `

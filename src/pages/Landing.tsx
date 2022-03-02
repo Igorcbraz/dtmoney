@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router'
 import { scroller, Element} from 'react-scroll'
 import { Helmet } from 'react-helmet'
+import { Link } from 'react-router-dom';
 
 import { RenderHeader } from '../components/HeaderLanding/RenderHeader/index';
 
@@ -12,8 +13,21 @@ import cellphoneMockup from '../assets/cellphone-mockup.png';
 import planningFinance from '../assets/illustration-chart.png';
 import controlFinance from '../assets/illustration-control-finance.png';
 import money from '../assets/illustration-money.png';
+import { ReactComponent as Instagram  }  from '../assets/Instagram.svg';
+import { ReactComponent as Linkedin  }  from '../assets/Linkedin.svg';
+import { ReactComponent as Github  }  from '../assets/Github.svg';
 
-import { Container, Introduction, SectionStyles, Features, CardContainer, Sentence } from '../styles/landing';
+import { 
+    Container, 
+    Introduction, 
+    SectionStyles,
+    Features, 
+    CardContainer, 
+    Sentence, 
+    SocialMedias,
+    Footer,
+    Final
+} from '../styles/landing';
 
 
 export function Landing(){
@@ -131,6 +145,65 @@ export function Landing(){
                     </button>
                 </Sentence>
             </Element>
+            <SocialMedias>
+                Conecte-se conosco nas redes sociais:
+
+                <ul>
+                    <li>
+                        <a href="https://www.instagram.com/igorcbraz/" target='_blank'><Instagram/></a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/Igorcbraz/dtmoney" target='_blank'><Github/></a>
+                    </li>
+                    <li>
+                        <a href="https://www.linkedin.com/in/igorcbraz" target='_blank'><Linkedin/></a>
+                    </li>
+                </ul>
+            </SocialMedias>
+            <Footer>
+                <div>
+                    <h3>Dtmoney</h3>
+                    <p>A maneira mais rápida, fácil e simples de controlar seus gastos financeiros e ver métricas claras sobre seus dados</p>
+                </div>
+                <div>
+                    <h3>Produtos</h3>
+                    <ul>
+                        <li>Dtmoney - Controle Financeiro</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Links Úteis</h3>
+                    <ul>
+                        <li>
+                            <Link to='/Home'>Dashboard</Link>
+                        </li>
+                        <li>
+                            <Link to='/Profile'>Sua conta</Link>
+                        </li>
+                        <li>
+                            <Link to='/Docs'>Documentação</Link>
+                        </li>
+                        <li>
+                            <Link to='/Help'>Ajuda</Link>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Contato</h3>
+                    <ul>
+                        <li>design@igorcbraz.tech</li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/igorcbraz" target='_blank'>Linkedin</a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/Igorcbraz" target='_blank'>Github</a>
+                        </li>
+                    </ul>
+                </div>
+            </Footer>
+            <Final>
+                <a href="https://storyset.com/data" target='_blank'>Data illustrations by Storyset</a>
+            </Final>
         </Container>
     )
 }
